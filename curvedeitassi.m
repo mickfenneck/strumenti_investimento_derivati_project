@@ -9,16 +9,13 @@ function [ output_args ] = curvedeitassi( input_args )
 
 %%dati btp  organizzati in struttura
 
-clear
-clc
-
 %stru={'Bond'; 'Bond';'Bond';'Bond';'Bond'; };
 %prezzi=[100.48;105.37;108.17;114.48;108.92];
 
 %matu=[datenum('4-Jan-2022'),datenum('4-Jul-2023'),datenum('4-Jul-2025')...
       %,datenum('4-Jul-2018'),datenum('4-Jan-2020')];
 %sett=[datenum('20-Nov-2017'),datenum('20-Nov-2017'),datenum('20-Nov-2017')...
-      ,datenum('20-Nov-2017'),datenum('20-Nov-2017')];
+  %    ,datenum('20-Nov-2017'),datenum('20-Nov-2017')];
 
   %cedole=[0.05;0.0375;0.0325;0.0425;0.0325];
   %
@@ -57,7 +54,10 @@ clc
 %Matlab (mathworks USA)
 
 
-%% Copyright (c) 2017 Elia Scarparo - mat Michele Sordo - Stefano Zampiero
+%% Copyright (c) 2017
+% Elia Scarparo     - Mat. 190459
+% Michele Sordo     - Mat. 190205
+% Stefano Zampiero  - Mat. 190203
 
 %% COMANDI FUNZIONE
 

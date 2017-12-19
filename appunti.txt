@@ -19,8 +19,8 @@ importazione
 portafoglio teorico
  -> curve b
  -> curve ns
- portafoglio reale (dati di mercato)
- -> valori
+portafoglio reale (dati di mercato)
+-> valori
 
- confrontare
+confrontare
 Grafici 
