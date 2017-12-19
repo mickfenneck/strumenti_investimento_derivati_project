@@ -1,7 +1,10 @@
 %% Script del progetto di Strumenti di Investimento e Derivati
+% Questo script permette di far funzionare il progetto semplicemente
+% trascinando l'icona dello script nel Current Folder
 clear
 clc
 
+% Il comando carica i dati salvati in formato .mat:
 load data/btp.mat
 
 % creo due bond
