@@ -14,5 +14,8 @@ for i=1:length(bonds)
     disp(bonds(i).price);
 end
 
-printBtpPlots(btp);
+port = [{'btp1'},{'btp2'},{'btp3'},{'btp4'},...
+        {'btp5'},{'btp6'},{'btp7'},{'btp8'},{'btp9'}];
+    
+printBtpPlots(btp,port);
 
