@@ -11,13 +11,19 @@ classdef bond
     
     methods
         function obj = bond (price, sett, matu, coup)
-            obj.price = price;
-            obj.settlement = datenum(sett);
-            obj.maturity = datenum(matu);
-            obj.coupon = coup;
+            if ~isa(price,'double')
+                error('Price needs to be double type');
+            end
+            if ~isa(coup,'double')
+                error('Coupon needs to be double type');
+            end
             if obj.settlement > obj.maturity
                 error('Maturity date needs to be after settlement date');
             end
+            obj.price = price;
+            obj.settlement = datenum(sett);
+            obj.maturity = datenum(matu);
+            obj.coupon = coup; 
         end
         
     end
