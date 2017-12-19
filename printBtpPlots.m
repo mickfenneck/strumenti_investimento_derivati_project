@@ -1,8 +1,23 @@
-function [ ] = printBtpPlots( btp , titoli)
+function [ ] = printBtpPlots( btp , titoli, firstDate, lastDate)
 %PRINTBTPPLOTS Prints btps plots
 %   Simple plots
 
+date1 = 0;
+date2 = 0;
 ntitoli = length(titoli);
+for i = 1:length(btp.date)
+    if btp.date(i) == firstDate
+        date1 = i;
+    elseif btp.date(i) == lastDate
+        date2 = i;
+    end
+end
+
+if (date1 == 0) || (date2 == 0)
+    error('Date is wrong');
+end
+
+
 
 figure
 if mod(ntitoli,4) == 0
@@ -21,7 +36,7 @@ end
 
 for i = 1:ntitoli
     subplot(nrow,ncol,i)        
-    plot(btp.date, btp{1:end,titoli(i)})
+    plot(btp.date(date1:date2), btp{1:end,titoli(i)})
     title(titoli(i));
 end
 
