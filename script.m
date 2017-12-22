@@ -8,8 +8,6 @@ clc
 load data/btp.mat
 load data/bonds.mat
 
-pathBtp = 'data/btp.mat';
-pathBonds = 'data/bonds.mat';
 dateSettlement = '17-Nov-2017';
 portCodes = [{'btp1'},{'btp2'},{'btp7'},{'btp9'}];
 model = 'Bootstrap';
