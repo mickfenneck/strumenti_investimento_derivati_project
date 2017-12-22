@@ -1,4 +1,4 @@
-function [ output_args ] = curvedeitassi( input_args )
+function [ out ] = curvedeitassi(btp,bonds,dateSettlement,portCodes,model )
 
 %CURVEDEITASSI è una funzione che mi permette di....
 
@@ -65,6 +65,18 @@ function [ output_args ] = curvedeitassi( input_args )
 % Ogni comando e ogni passo del programma devono essere adeguatamente
 % commentati (anche la struttura dei cicli o delle istruzioni se presenti)
 
+
+%% load data
+%% structureData
+%% createPortfolio
+%% fitCurves
+%% realForecast
+%% compareResults
+
+%% function
+port = bonds({'btp1','btp3'},:);
+
+out = port;
 %% IN AGGIUNTA AL CONTENUTO DI OUTPUT MINIMO RICHIESTO
 %Se si desidera aggiungere qualcosa che si ritiene utile per una migliore
 %comprensione del programma (esempio:plot o elaborazioni aggiuntive...)

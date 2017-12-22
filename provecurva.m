@@ -1,4 +1,4 @@
-load dataBTP.mat
+load data/dataBTP.mat
 
 
 
