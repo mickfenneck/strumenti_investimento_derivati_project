@@ -10,12 +10,18 @@ load data/bonds.mat
 
 pathBtp = 'data/btp.mat';
 pathBonds = 'data/bonds.mat';
-dateSettlement = '12-Aug-2013';
+dateSettlement = '17-Nov-2017';
 portCodes = [{'btp1'},{'btp2'},{'btp7'},{'btp9'}];
 model = 'Bootstrap';
 
-a = curvedeitassi(btp,bonds,dateSettlement,portCodes,model);
-disp(a);
+port = curvedeitassi(btp,bonds,dateSettlement,portCodes,model);
+
+disp(port);
+
+% for i = 1:length(portCodes)
+%     disp(portCodes(i));
+% end
+%port = bonds({'btp1','btp3'},:);
 
 %port = bonds({'btp1','btp3'},:)
 

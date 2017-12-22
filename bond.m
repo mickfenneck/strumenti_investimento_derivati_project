@@ -2,6 +2,10 @@ classdef bond
     %BOND Summary of this class goes here
     %   Detailed explanation goes here
     
+    properties (Constant)
+        instrument = 'Bond'
+    end
+    
     properties
         price           % price
         settlement      % settlment date

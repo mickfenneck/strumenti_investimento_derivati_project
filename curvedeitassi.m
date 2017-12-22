@@ -66,17 +66,14 @@ function [ out ] = curvedeitassi(btp,bonds,dateSettlement,portCodes,model )
 % commentati (anche la struttura dei cicli o delle istruzioni se presenti)
 
 
-%% load data
-%% structureData
+
 %% createPortfolio
 %% fitCurves
 %% realForecast
 %% compareResults
 
 %% function
-port = bonds({'btp1','btp3'},:);
-
-out = port;
+out = createPortfolio(btp,bonds,dateSettlement,portCodes);
 %% IN AGGIUNTA AL CONTENUTO DI OUTPUT MINIMO RICHIESTO
 %Se si desidera aggiungere qualcosa che si ritiene utile per una migliore
 %comprensione del programma (esempio:plot o elaborazioni aggiuntive...)
