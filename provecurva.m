@@ -1,7 +1,7 @@
 load data/dataBTP.mat
 
 
-
+%% createCurve
 
 inst={'Bond';'Bond';'Bond';'Bond';}
 
@@ -11,6 +11,9 @@ curv=IRDataCurve.bootstrap('Zero',btp.date(1),inst,char,'InstrumentCouponRate',b
 instr=[btp.date datenum(btp.maturity) btp.price btp.coupon];
 curv2= IRFunctionCurve.fitNelsonSiegel('Zero',btp.date(1), instr);
 curv3=IRFunctionCurve.fitSvensson( 'Zero',btp.date(1),instr);
+
+
+%% curvePrice
 
 % stima del prezzo di un titolo usando la curva
 tit.price=104.19;

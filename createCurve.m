@@ -1,36 +1,21 @@
-function [ curva ] = createCurve( bonds )
+function [ curva ] = createCurve( bonds,model )
 %CREATECURVE Summary of this function goes here
 %   Detailed explanation goes here
 
-% strumenti={'Bond';'Bond';'Bond';'Bond';'Bond'};
-% prezzi = [100.48; 105.37; 108.14; 114.48; 108.83];
-% 
-% sett = [datenum('20-Nov-2017'),...
-%         datenum('20-Nov-2017'),...
-%         datenum('20-Nov-2017'),...
-%         datenum('20-Nov-2017'),...
-%         datenum('20-Nov-2017')];
-% 
-% matu = [datenum('4-Jan-2022'),...
-%         datenum('4-Jul-2023'),...
-%         datenum('4-Jul-2025'),...
-%         datenum('4-Jul-2018'),...
-%         datenum('4-Jan-2020')];
-%     
-% cedole = [0.05; 0.0375; 0.0325; 0.0425; 0.0325];
-%     
-% btp=struct('name',{strumenti},...
-%            'price',prezzi,...
-%            'maturity',{matu},...
-%            'coupon',cedole,...
-%            'date',sett);
-% 
-% %questi dati permettono di costruire la curva dei tassi con la funzione
-% %IRDataCurve.bootstrap
-% 
-curva = IRDataCurve.bootstrap('Zero',btp.date(1,1),btp.name, ...
-    [btp.date' btp.maturity' btp.price],...
-    'InstrumentCouponRate',btp.coupon);
+%inst={'Bond';'Bond';'Bond';'Bond';}
+
+%char=[datenum(btp.date) datenum(btp.maturity) btp.price]
+if model == 'Bootstrap'
+    curva =IRDataCurve.bootstrap('Zero',btp.date(1),inst,char,'InstrumentCouponRate',btp.coupon);
+%la curva ns vuole inst diversa
+elseif model == 'NelsonSiegel'
+    instr=[btp.date datenum(btp.maturity) btp.price btp.coupon];
+    curva= IRFunctionCurve.fitNelsonSiegel('Zero',btp.date(1), instr);
+elseif model == 'Svensson'
+    curva=IRFunctionCurve.fitSvensson( 'Zero',btp.date(1),instr);
+else
+    error('Model deve contenere i seguenti valori: Bootstrap, NelsonSiegel, Svensson');
+end
 
 end
 

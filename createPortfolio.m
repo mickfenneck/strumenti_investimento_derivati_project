@@ -3,6 +3,7 @@ function [ portfolio ] = createPortfolio( btp,bonds,dateSettlement,portCodes)
 %   Detailed explanation goes here
 portfolio = bonds(portCodes,:);
 portfolio.date = repelem(datenum(dateSettlement),length(portCodes))';
+portfolio.instrument = repelem({'Bond'},length(portCodes))';
 %price
 index = find(btp.date == datenum(dateSettlement));
 portfolio.prices = btp(index,portCodes).Variables';

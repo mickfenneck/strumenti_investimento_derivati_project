@@ -65,15 +65,17 @@ function [ out ] = curvedeitassi(btp,bonds,dateSettlement,portCodes,model )
 % Ogni comando e ogni passo del programma devono essere adeguatamente
 % commentati (anche la struttura dei cicli o delle istruzioni se presenti)
 
+%% function
+portfolio = createPortfolio(btp,bonds,dateSettlement,portCodes);
+%curva = createCurve(portfolio,model);
+[dirty, clean] = curvePrice(bonds,curve);
+out = portfolio;
 
-
-%% createPortfolio
-%% fitCurves
-%% realForecast
+%% real forecast
 %% compareResults
 
-%% function
-out = createPortfolio(btp,bonds,dateSettlement,portCodes);
+
+
 %% IN AGGIUNTA AL CONTENUTO DI OUTPUT MINIMO RICHIESTO
 %Se si desidera aggiungere qualcosa che si ritiene utile per una migliore
 %comprensione del programma (esempio:plot o elaborazioni aggiuntive...)
