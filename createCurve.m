@@ -3,7 +3,8 @@ function [curva] = createCurve( bonds,model )
 %   Detailed explanation goes here
 
 inst=repelem({'Bond'},length(portCodes))';
-char=[datenum(btp.date) datenum(btp.maturity) btp.price]
+char=[datenum(btp.date) datenum(btp.maturity) btp.price];
+instr=[btp.date datenum(btp.maturity) btp.price sbtp.coupon];
 
 if model == 'Bootstrap'
     curva =IRDataCurve.bootstrap('Zero',btp.date(1),inst,char,'InstrumentCouponRate',btp.coupon);
