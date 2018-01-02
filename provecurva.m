@@ -55,7 +55,7 @@ tab = table(port.price, port.eprice, port.eprice2,port.eprice3, 'VariableNames',
     {'True' 'Bootstrap' 'NelsonSiegel' 'Svensson'}, 'RowNames',{'Btp' 'Btp1'});
 disp(tab)
 
-%plot della curva
+%% plot della curva
 figure
 point= datenum('01-Oct-2017'):180:datenum('31-Dec-2028');
 yield1 = bndyield(btp.price,btp.coupon,btp.date,btp.maturity);
