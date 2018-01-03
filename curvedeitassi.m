@@ -1,4 +1,4 @@
-function [ out ] = curvedeitassi(btp,bonds,dateSettlement,portCodes,model )
+function [portfolio, curva] = curvedeitassi(btp,bonds,dateSettlement,portCodes,model, valMkt)
 
 %CURVEDEITASSI è una funzione che mi permette di....
 
@@ -67,15 +67,13 @@ function [ out ] = curvedeitassi(btp,bonds,dateSettlement,portCodes,model )
 
 %% function
 portfolio = createPortfolio(btp,bonds,dateSettlement,portCodes);
-%curva = createCurve(portfolio,model);
+curva = createCurve(portfolio,model);
 %[dirty, clean] = curvePrice(bonds,curve,model);
 % bonds -> tabella iniziale -> selezioni titolo
 % portfolio -> bond sistemata
 
-out = portfolio;
-
 %% prezzoPrev = real forecast(titolo, dataPrev, curva) -> valore al tot giorno secondo la curva STEF
-%% compareResults(titolo, valoreMkt, data, prezzoPrev); -> confronti differenza tra vmkt e prezzoprev ELIA
+%% compareResults(titolo, valMkt, data, prezzoPrev); -> confronti differenza tra vmkt e prezzoprev ELIA
 %% plot grafici ELIA
 
 

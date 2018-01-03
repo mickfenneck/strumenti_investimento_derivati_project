@@ -1,3 +1,6 @@
+clear
+clc
+
 load data/dataBTP.mat
 
 

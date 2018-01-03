@@ -10,9 +10,14 @@ load data/bonds.mat
 
 dateSettlement = '17-Nov-2017';
 portCodes = [{'btp1'},{'btp2'},{'btp7'},{'btp9'}];
-model = 'Bootstrap';
+model1 = 'Bootstrap';
+model2 = 'NelsonSiegel';
+model3 = 'Svensson';
+valMkt = 13;
 
-port = curvedeitassi(btp,bonds,dateSettlement,portCodes,model);
+[port, curva1] = curvedeitassi(btp,bonds,dateSettlement,portCodes,model1,valMkt);
+[~, curva2] = curvedeitassi(btp,bonds,dateSettlement,portCodes,model2,valMkt);
+[~, curva3] = curvedeitassi(btp,bonds,dateSettlement,portCodes,model3,valMkt);
 
 disp(port);
 

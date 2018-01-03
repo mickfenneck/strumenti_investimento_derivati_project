@@ -1,22 +1,19 @@
 function [curva] = createCurve( bonds,model )
 %CREATECURVE Summary of this function goes here
 %   Detailed explanation goes here
-
-inst=repelem({'Bond'},length(portCodes))';
-char=[datenum(btp.date) datenum(btp.maturity) btp.price];
-instr=[btp.date datenum(btp.maturity) btp.price sbtp.coupon];
-
-if model == 'Bootstrap'
-    curva =IRDataCurve.bootstrap('Zero',btp.date(1),inst,char,'InstrumentCouponRate',btp.coupon);
-elseif model == 'NelsonSiegel'
-    instr=[btp.date datenum(btp.maturity) btp.price btp.coupon];
-    curva= IRFunctionCurve.fitNelsonSiegel('Zero',btp.date(1), instr);
-elseif model == 'Svensson'
-    curva=IRFunctionCurve.fitSvensson( 'Zero',btp.date(1),instr);
+if strcmp(model,'Bootstrap')
+    char = [bonds.date datenum(bonds.maturity) bonds.prices];
+    curva =IRDataCurve.bootstrap('Zero',bonds.date(1),bonds.instrument,char,'InstrumentCouponRate',bonds.coupon);
+elseif strcmp(model,'NelsonSiegel') || strcmp(model,'Svensson')
+    instr=[bonds.date datenum(bonds.maturity) bonds.prices bonds.coupon];
+    if strcmp(model,'NelsonSiegel')
+        curva= IRFunctionCurve.fitNelsonSiegel('Zero',bonds.date(1), instr);
+    elseif strcmp(model,'Svensson')
+        curva=IRFunctionCurve.fitSvensson( 'Zero',bonds.date(1),instr);
+    end
 else
     error('Model deve contenere i seguenti valori: Bootstrap, NelsonSiegel, Svensson');
 end
-
 
 end
 
