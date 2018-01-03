@@ -66,9 +66,11 @@ function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,port
 % commentati (anche la struttura dei cicli o delle istruzioni se presenti)
 
 %% function
-port = createPortfolio(btp,bonds,dateSettlement,portCodes);
+[port, valore_mkt] = createPortfolio(btp,bonds,dateSettlement,portCodes,portValues);
 curva = createCurve(port,model);
-valore_mkt = port.prices'*portValues/100;
+startDate = datestr(port.date(1));
+endDate = '17-Nov-2027';
+yield = plotSpotCurve( port, curva, startDate, endDate, 'r' );
 o = valore_mkt;
 %[dirty, clean] = curvePrice(bonds,curve,model);
 % bonds -> tabella iniziale -> selezioni titolo
