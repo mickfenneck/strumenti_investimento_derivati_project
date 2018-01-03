@@ -1,4 +1,4 @@
-function [portfolio, curva] = curvedeitassi(btp,bonds,dateSettlement,portCodes,model, valMkt)
+function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model, valMkt)
 
 %CURVEDEITASSI è una funzione che mi permette di....
 
@@ -66,8 +66,10 @@ function [portfolio, curva] = curvedeitassi(btp,bonds,dateSettlement,portCodes,m
 % commentati (anche la struttura dei cicli o delle istruzioni se presenti)
 
 %% function
-portfolio = createPortfolio(btp,bonds,dateSettlement,portCodes);
-curva = createCurve(portfolio,model);
+port = createPortfolio(btp,bonds,dateSettlement,portCodes);
+curva = createCurve(port,model);
+valore_mkt = port.prices'*portValues/100;
+o = valore_mkt;
 %[dirty, clean] = curvePrice(bonds,curve,model);
 % bonds -> tabella iniziale -> selezioni titolo
 % portfolio -> bond sistemata
