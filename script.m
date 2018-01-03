@@ -10,18 +10,21 @@ load data/bonds.mat
 
 dateSettlement = '17-Nov-2017';
 portCodes = [{'btp1'},{'btp2'},{'btp7'},{'btp9'}];
-portValues = [1000;500;3000;2000];
+portValues = [1000;1000;1000;1000];
 model1 = 'Bootstrap';
 model2 = 'NelsonSiegel';
 model3 = 'Svensson';
-valMkt = 13;
+valMkt = [103.12; 103.21; 101.11; 104.99];
 
-[port, curva1,vm] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model1,valMkt);
-[~, curva2,~] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model2,valMkt);
-[~, curva3,~] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model3,valMkt);
+%[port, curva1,vm] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model1,valMkt);
+%[port, curva2,vm] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model2,valMkt);
+[port, curva3,vm] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model3,valMkt);
 
+disp('Portfolio');
 disp(port);
-
+difference = comparePortfolio(port);
+disp('Portfolio difference');
+disp(difference);
 % for i = 1:length(portCodes)
 %     disp(portCodes(i));
 % end

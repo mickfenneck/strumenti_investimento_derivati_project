@@ -70,8 +70,13 @@ function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,port
 curva = createCurve(port,model);
 startDate = datestr(port.date(1));
 endDate = '17-Nov-2027';
-yield = plotSpotCurve( port, curva, startDate, endDate, 'r' );
-o = valore_mkt;
+yield = plotSpotCurve( port, curva, startDate, endDate, 'r');
+%calcolo prezzo teorico dei titoli
+forecastDate = '1-Sep-2018';
+port = curvePrices(port, curva, forecastDate);
+port = compareResult(port,valMkt);
+
+
 %[dirty, clean] = curvePrice(bonds,curve,model);
 % bonds -> tabella iniziale -> selezioni titolo
 % portfolio -> bond sistemata

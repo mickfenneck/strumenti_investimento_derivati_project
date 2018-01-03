@@ -1,12 +1,10 @@
-comparefunction [ comparison ] = compareResult(portCodes,valoreMkt,data,clean,dirty,coupon)
-%COMPARERESULT Confronta il valore di mercato del titolo alla data di 
-% osservazione con quello stimato con la curva. Il valore di mkt reale va
-% specificato dall'utente prima di usare la funzione.
-% La funzione si propone di creare una tabella riportante i prezzi teorici
-% clean e dirty e il prezzo reale osservato.
-comparison=table(clean,dirty,valoreMkt,'VariableNames',{'clean',...
-    'dirty','valore_reale'},'RowNames',portCodes)
-disp(comparison)
-cfplot(btp.date,btp.coupon,'ShowAmnt',)
+function [ bonds ] = compareResult(bonds,valMkt)
+
+bonds.difference = repelem(0,length(bonds.instrument))';
+
+for i=1:length(bonds.instrument)
+    bonds.difference(i) = valMkt(i)-bonds.clean(i);
+end
+
 end
 
