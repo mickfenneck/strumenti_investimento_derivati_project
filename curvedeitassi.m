@@ -1,4 +1,4 @@
-function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model, valMkt)
+function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model, forecastDate, valMkt)
 
 %CURVEDEITASSI è una funzione che mi permette di....
 
@@ -70,9 +70,9 @@ function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,port
 curva = createCurve(port,model);
 startDate = datestr(port.date(1));
 endDate = '17-Nov-2027';
+%% come settare end date?
 yield = plotSpotCurve( port, curva, startDate, endDate, 'r');
 %calcolo prezzo teorico dei titoli
-forecastDate = '1-Sep-2018';
 port = curvePrices(port, curva, forecastDate);
 port = compareResult(port,valMkt);
 
@@ -80,11 +80,6 @@ port = compareResult(port,valMkt);
 %[dirty, clean] = curvePrice(bonds,curve,model);
 % bonds -> tabella iniziale -> selezioni titolo
 % portfolio -> bond sistemata
-
-%% prezzoPrev = real forecast(titolo, dataPrev, curva) -> valore al tot giorno secondo la curva STEF
-%% compareResults(titolo, valMkt, data, prezzoPrev); -> confronti differenza tra vmkt e prezzoprev ELIA
-%% plot grafici ELIA
-
 
 
 %% IN AGGIUNTA AL CONTENUTO DI OUTPUT MINIMO RICHIESTO

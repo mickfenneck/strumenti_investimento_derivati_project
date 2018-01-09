@@ -14,9 +14,10 @@ portValues = [1000;500;3000;2000];
 model1 = 'Bootstrap';
 model2 = 'NelsonSiegel';
 model3 = 'Svensson';
+forecastDate = '1-Sep-2018';
 valMkt = [103.12; 103.21; 101.11; 104.99];
 
-[port, curva1,vm] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model1,valMkt);
+[port, curva1,vm] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model1,forecastDate,valMkt);
 %[port, curva2,vm] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model2,valMkt);
 %[port, curva3,vm] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model3,valMkt);
 
