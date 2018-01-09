@@ -35,6 +35,15 @@ disp
 
 COMANDI USATI PER SINGOLA FUNZIONE:
 
+script ( script iniziale di richiamo alla funzione curvedeitassi):
+clear
+clc
+load
+disp
+
+curvedeitassi function ( funzione generale di richiamo alle seguenti funzioni):
+datestr
+
 1. createPortfolio function:
 repelem
 datenum
@@ -49,7 +58,34 @@ IRFunctionCurve.fitNelsonSiegel
 IRFunctionCurve.fitSvensson
 error
 
-3. curvePrices function:
+3. plotForwardCurve function:
+figure
+datenum
+bndyield
+plot
+title
+xlabel
+ylabel
+hold on
+scatter
+datenum
+datetick
+
+4. plotSpotCurve function
+figure
+datenum
+bndyield
+plot
+title
+xlabel
+ylabel
+hold on
+scatter
+datetick
+
+5. plotYieldCurve function
+
+6. curvePrices function:
 repelem
 length
 cfamounts
@@ -57,42 +93,9 @@ datestr
 end
 getDiscountFactors
 
-4. compareResult function:
+7. compareResult function:
 repelem
 length
 
-5. comparePortfolio function:
+8. comparePortfolio function:
 sum
-
-6. plotForwardCurve function:
-figure
-datenum
-bndyield
-plot
-title
-xlabel
-ylabel
-hold on
-scatter
-datenum
-datetick
-
-7. plotSpotCurve function
-figure
-datenum
-bndyield
-plot
-title
-xlabel
-ylabel
-hold on
-scatter
-datetick
-
-8. plotYieldCurve function
-
-9. script ( script finale di richiamo alle funzioni):
-clear
-clc
-load
-disp
