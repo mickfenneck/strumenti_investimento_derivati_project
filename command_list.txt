@@ -1,0 +1,98 @@
+LISTA FUNZIONI USATE:
+
+COMANDI USATI COMPLESSIVAMENTE:
+
+repelem
+datenum
+length
+find
+strcmp
+IRDataCurve.bootstrap
+IRFunctionCurve.fitNelsonSiegel
+IRFunctionCurve.fitSvensson
+error
+cfamounts
+datestr
+end
+getDiscountFactors
+sum
+figure
+datenum
+bndyield
+plot
+title
+xlabel
+ylabel
+hold on
+scatter
+datenum
+datetick
+clear
+clc
+load
+disp
+
+
+COMANDI USATI PER SINGOLA FUNZIONE:
+
+1. createPortfolio function:
+repelem
+datenum
+length
+find
+
+2. createCurve function:
+strcmp
+datenum
+IRDataCurve.bootstrap
+IRFunctionCurve.fitNelsonSiegel
+IRFunctionCurve.fitSvensson
+error
+
+3. curvePrices function:
+repelem
+length
+cfamounts
+datestr
+end
+getDiscountFactors
+
+4. compareResult function:
+repelem
+length
+
+5. comparePortfolio function:
+sum
+
+6. plotForwardCurve function:
+figure
+datenum
+bndyield
+plot
+title
+xlabel
+ylabel
+hold on
+scatter
+datenum
+datetick
+
+7. plotSpotCurve function
+figure
+datenum
+bndyield
+plot
+title
+xlabel
+ylabel
+hold on
+scatter
+datetick
+
+8. plotYieldCurve function
+
+9. script ( script finale di richiamo alle funzioni):
+clear
+clc
+load
+disp
