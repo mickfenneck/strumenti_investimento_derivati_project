@@ -1,35 +1,30 @@
 function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model, forecastDate, valMkt)
-
-%CURVEDEITASSI è una funzione che mi permette di....
+%%CURVEDEITASSI è una funzione che mi permette di calcolare il valore di
+% mercato di un portafoglio di titoli obbiligazionari, stimare la curva dei
+%tassi con 3 metodologie di stima (Bootstrap, Nelson-Siegel e Svensson), 
+%estrarre i tassi spot, i tassi forward dalle curve e quindi utilizzare la 
+%curva per stimare il prezzo teorico dei titoli presenti in portafoglio e 
+%successivamente calcolare la differenza tra il loro valore reale e il 
+%loro valore di mercato estendendo la valutazione anche al portafoglio.
 
 
 % All'interno del programma possiamo individuare i seguenti passaggi....
-% Partendo dai dati di input... Successivamente sono stati calcolati..
-% Infine sono stati calcolati...Come output otteniamo...con relativo plot..
+% Partendo dai dati di input... 
+%
 
-%%dati btp  organizzati in struttura
-
-%stru={'Bond'; 'Bond';'Bond';'Bond';'Bond'; };
-%prezzi=[100.48;105.37;108.17;114.48;108.92];
-
-%matu=[datenum('4-Jan-2022'),datenum('4-Jul-2023'),datenum('4-Jul-2025')...
-      %,datenum('4-Jul-2018'),datenum('4-Jan-2020')];
-%sett=[datenum('20-Nov-2017'),datenum('20-Nov-2017'),datenum('20-Nov-2017')...
-  %    ,datenum('20-Nov-2017'),datenum('20-Nov-2017')];
-
-  %cedole=[0.05;0.0375;0.0325;0.0425;0.0325];
-  %
-  %btp=struct('name',{stru},'price',prezzi,'maturity',{matu},'coupon',cedole...
-      %,'date',sett);
-
-    
+%Successivamente sono stati calcolati..
+% Infine sono stati calcolati...
+%Come output otteniamo...con relativo plot..
 
 
+
+ 
 %Questi dati permettono di costruire la curva dei tassi con la funzione
 %MATLAB IRDataCurve.bootstrap
+%MATLAB IRFunction.NelsonSI
+%MATLAB IRDataCurve.bootstrap
 
-%curva=IRDataCurve.bootstrap('Zero',btp.date(1,1),btp.name,[btp.date' btp.maturity'...
-    %btp.price],'InstrumentCouponRate',btp.coupon);
+
 
 
 %descrizione degli input
@@ -42,19 +37,44 @@ function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,port
 %output1=...
 %output2=...
 
-%All'interno del programma sono state richiamate le seguenti funzioni
+%% All'interno del programma sono state richiamate le seguenti funzioni
 %matlab già esistenti:....
+%auguri
+%auguroni
+%augurissimi 
+%augurissimissimi
+%augurissimissimissimi
+% Elia diocane
+% diocane Elia
+% Elia dio boia
+% dio boia Elia
 
 
-%BIBLIOGRAFIA
-%fonte utilizzata come approfondimento di...:
-%"Titolo"
-%(Autore)
-%per la costruzione del programma la fonte utilizzata è il Toolbox.... di
-%Matlab (mathworks USA)
+%% BIBLIOGRAFIA
+
+%fonte utilizzata come approfondimento della metodologia di stima della 
+%term structure con il modello di Nelson siegel e Svensson per estrazione
+%dei tassi spot dalla curva dei tassi:
+
+%"Il modello matematico sottostante alla curva dei rendimenti della BCE"
+% autori:(Gabriella D'Agostino, Antonio Guglielmi)
 
 
-%% Copyright (c) 2017
+
+%"Examing the Nelson-Siegel class of term structure models"
+% autore("Michiel De Pooter")
+% In questo paper l'autore ha esaminato varie estensioni del modello Nelson
+% Siegel, dimostrando che usando modelli più flessibili conduce ad una
+% migliore costruzione della term structure,inoltre ha dimostrato che il
+% modello a 4 fattori (Nelson-Siegel-Svensson) che aggiunge un secondo
+% fattore pendenza al modello NS a 3 fattori produce delle più accurate
+% previsoni della curva.
+
+%per la costruzione del programma la fonte utilizzata è il 
+%financial Toolbox di Matlab (mathworks USA)
+
+
+%% Copyright (c) 2017-2018
 % Elia Scarparo     - Mat. 190459
 % Michele Sordo     - Mat. 190205
 % Stefano Zampiero  - Mat. 190203
@@ -65,7 +85,7 @@ function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,port
 % Ogni comando e ogni passo del programma devono essere adeguatamente
 % commentati (anche la struttura dei cicli o delle istruzioni se presenti)
 
-%% function
+%% FUNCTION
 [port, valore_mkt] = createPortfolio(btp,bonds,dateSettlement,portCodes,portValues);
 curva = createCurve(port,model);
 startDate = datestr(port.date(1));
@@ -82,9 +102,56 @@ port = compareResult(port,valMkt);
 % portfolio -> bond sistemata
 
 
+%% DESCRIZIONE DEllE TRE METODOLOGIE DI STIMA DELLA CURVA DEI TASSI
+
+
+%I tre modelli  estraggono  i tassi spot utilizzando gli strumenti presenti
+%sul mercato.
+
+%Il modello bootstrap ricava il tasso che fissa il prezzo di mercato ed il
+%resto lo trova per interpolazione; tale modello è una semplice
+%approssimazione dei dati di mercato e può risentire di eventuali
+%imperfezioni come sovrastima o sottostima dei tassi veri e dipendenza
+%stretta dei dati. Infatti questo metodo calcola i tassi spot in punti
+%definiti lasciando uno spazion fra i due punti; se vengono chiesti dei
+%punti intermedi va a fare un'interpolazione fra i due punti che può essere
+%lineare, quadratica.... ma è sempre un'interpolazione e da dei piccoli
+%errori.
+
+% Nelson & Siegel (1987) hanno suggerito un diverso approccio:
+% creando la curva forward a una certa data con una classe matematica di 
+% funzioni approssimate. In matlab utilizzando questo modello il software 
+% lavora in questo modo: sulla base dei dati costruisce la curva e poi si
+% estrae la curva dei tassi spot; esso calcola in punti definiti i tassi e
+% poi va a calcolarsi i 4 parametri della curva Nelson siegel.
+% Il paper di "Gabriella D'Agostino, Antonio Guglielmi" afferma che
+% il modello Nelson-Siegel-Svensson è utilizzato da molte banche centrali
+% per costruire la curva dei rendimenti in quanto
+% provvede ad una parsimoniosa approssimazione della curva utilizzando
+% pochi parametri che danno una buona interpretazione a breve e a medio
+% lungo termine.
+
+% Per incrementare la flessibilità e migliorare l?adattamento Svensson
+% estende la funzione di Nelson - Siegel aggiungendo un quarto parametro
+% pendenza al modello a 3 fattori e ciò conduce ad una migliore previsione
+% della curva.  Ciò è confermato nel paper di "Michiel De Pooter") 
+% nel quale l'autore ha esaminato varie estensioni del modello 
+% Nelson Siegel, dimostrando che usando modelli più flessibili porta ad 
+% una migliore costruzione della term structure,inoltre ha dimostrato che il
+% modello a 4 fattori (Nelson-Siegel-Svensson) che aggiunge un secondo
+% fattore pendenza al modello NS a 3 fattori produce delle più accurate
+% previsoni della curva.
+
+
 %% IN AGGIUNTA AL CONTENUTO DI OUTPUT MINIMO RICHIESTO
+
+% qui dobbiamo dire che in più abbiamo scelto il metodo svensson per la sua
+% maggiore precisione, il plot delle curve con i diversi metodi e qualche
+% altra figata esempio table con il confronto 
+
 %Se si desidera aggiungere qualcosa che si ritiene utile per una migliore
 %comprensione del programma (esempio:plot o elaborazioni aggiuntive...)
+
 
 end
 
