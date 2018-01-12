@@ -98,16 +98,34 @@ forecastDate = '1-Sep-2018';
 % e prezzi di mercato reali.
 valMkt = [103.12; 103.21; 101.11; 104.99];
 
+%% Come visualizzare la curva
+% plotCurve è una variablie booleana che permette di sopprimere di
+% visualizzare il grafico della curva dei tassi:
+% - true  -> la curva viene visualizzata
+% - false -> la curva NON viene visualizzata
+% l'input è opzionale, se non si voglio avere output visivi è sufficiente
+% non inserirlo.
+% Le diciture:
+% a) curvedeitassi(btp,bonds,dateSettlement,portfolio,model,forecastDate,valMkt);
+% b) curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt,false);
+% sopprimono ugualmente l'output grafico
+plotCurve = false;
+
 %% La funzione
 % A seguito dell'illustrazione degli input, si può procedere richiamando la
 % funzione curvedeitassi(..)
 
-%[port, curva1,vm] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model1,forecastDate,valMkt);
-[port, curva2,vm] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt);
-%[port, curva3,vm] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model3,forecastDate,valMkt);
+%[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model1,forecastDate,valMkt);
+[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt,plotCurve);
+%[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model3,forecastDate,valMkt);
 
-disp('Portfolio');
+
+%% Output
+disp('------------------------------------');
+disp('         Portafoglio finale');
+disp('------------------------------------');
 disp(port);
-difference = comparePortfolio(port);
-disp('Portfolio difference');
+disp('------------------------------------------------------------');
+disp('Differenza tra valore teorico e valore reale del portafoglio');
+disp('------------------------------------------------------------');
 disp(difference);
