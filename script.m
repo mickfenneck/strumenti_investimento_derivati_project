@@ -71,15 +71,36 @@ model3 = 'Svensson';
 portCodes = [{'btp1'},{'btp2'},{'btp7'},{'btp9'}];
 % quanti titoli inserire rispettivamente.
 portValues = [1000;500;3000;2000];
-% i dati sono riassunti nella seguente tabella
+% la funzione curvedeitassi(..) prenderà in input la table riassuntiva
 portfolio = table(portValues,'VariableNames',{'Values'},'RowNames',portCodes);
+disp('------------------------------------');
+disp('         Portafoglio titoli');
+disp('------------------------------------');
+disp(portfolio);
 
+%% Ulteriori input
+% Al fine di sviluppare una funzione che produca gli output richiesti nella
+% consegna, sono necessari ulteriori input:
+% - dateSettlement
+% - forecastDate
+% - valMkt
 
-%% PROSEGUIRE
-
+% dateSettlement deve essere una delle date contenute nella prima colonna
+% del file btp.mat, è necessaria al fine di costruire la curva dei tassi
+% dateSettlement sarà, necessariamente, la medesima per tutti i bond
 dateSettlement = '17-Nov-2017';
+% forecastDate sarà input necessario per calcolare cfamounts(..) tramite la
+% curva dei tassi che si andrà a costruire.
+% Per definizione deve essere successiva a dateSettlement
 forecastDate = '1-Sep-2018';
+% valMkt indica il valore di mercato dei bond inseriti nel portafoglio.
+% Questo array è necessario per calcolare le differenze tra prezzi teorici
+% e prezzi di mercato reali.
 valMkt = [103.12; 103.21; 101.11; 104.99];
+
+%% La funzione
+% A seguito dell'illustrazione degli input, si può procedere richiamando la
+% funzione curvedeitassi(..)
 
 %[port, curva1,vm] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model1,forecastDate,valMkt);
 [port, curva2,vm] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt);
