@@ -1,4 +1,4 @@
-function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model, forecastDate, valMkt)
+function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model, forecastDate, valMkt)
 %%CURVEDEITASSI è una funzione che mi permette di calcolare il valore di
 % mercato di un portafoglio di titoli obbligazionari, stimare la curva dei
 %tassi con 3 metodologie di stima (Bootstrap, Nelson-Siegel e Svensson), 
@@ -173,7 +173,7 @@ function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,port
 % commentati (anche la struttura dei cicli o delle istruzioni se presenti)
 
 %% FUNCTION
-[port, valore_mkt] = createPortfolio(btp,bonds,dateSettlement,portCodes,portValues);
+[port, valore_mkt] = createPortfolio(btp,bonds,dateSettlement,portfolio);
 curva = createCurve(port,model);
 startDate = datestr(port.date(1));
 endDate = '17-Nov-2027';

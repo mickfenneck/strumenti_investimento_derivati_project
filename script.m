@@ -72,7 +72,8 @@ portCodes = [{'btp1'},{'btp2'},{'btp7'},{'btp9'}];
 % quanti titoli inserire rispettivamente.
 portValues = [1000;500;3000;2000];
 % i dati sono riassunti nella seguente tabella
-table([1000;500;3000;2000],'VariableNames',{'Values'},'RowNames',{'btp1','btp2','btp7','btp9'})
+portfolio = table(portValues,'VariableNames',{'Values'},'RowNames',portCodes);
+
 
 %% PROSEGUIRE
 
@@ -80,9 +81,9 @@ dateSettlement = '17-Nov-2017';
 forecastDate = '1-Sep-2018';
 valMkt = [103.12; 103.21; 101.11; 104.99];
 
-%[port, curva1,vm] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model1,forecastDate,valMkt);
-[port, curva2,vm] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model2,forecastDate,valMkt);
-%[port, curva3,vm] = curvedeitassi(btp,bonds,dateSettlement,portCodes,portValues,model3,forecastDate,valMkt);
+%[port, curva1,vm] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model1,forecastDate,valMkt);
+[port, curva2,vm] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt);
+%[port, curva3,vm] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model3,forecastDate,valMkt);
 
 disp('Portfolio');
 disp(port);
