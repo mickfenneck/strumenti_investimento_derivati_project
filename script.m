@@ -1,19 +1,82 @@
-%% Script del progetto di Strumenti di Investimento e Derivati
-% Questo script permette di far funzionare il progetto semplicemente
-% trascinando l'icona dello script nel Current Folder
+%% Script Curve dei tassimdel progetto di Strumenti di Investimento e Derivati
+% Lo script illustra come richiamare la funzione "curvedeitassi(..)"
+% presenta come impostare gli input della funzione e fornisce un caso d'uso
+% della stessa.
+
+%% 0. Intestazione
+% pulisce il workspace dalle variabili precedenti
 clear
+% pulisce la console - Command Window - di Matlab
 clc
+% Caricamento i dati salvati in formato .mat:
+load data/btp.mat       % fornito da progetto
+load data/bonds.mat     % creato alla base del secondo foglio di btp.xlsx
 
-% Il comando carica i dati salvati in formato .mat:
-load data/btp.mat
-load data/bonds.mat
+%% 1.0 Input
+% la funzione richiede i seguenti input:
+% - codice titoli
+% - valori caratteristici titoli
+% - metodologia di stima
+% - portafoglio titoli
 
-dateSettlement = '17-Nov-2017';
-portCodes = [{'btp1'},{'btp2'},{'btp7'},{'btp9'}];
-portValues = [1000;500;3000;2000];
+%% 1.1 FILE input
+% I file contengono i seguenti input:
+% - codice titoli
+% - valori caratteristici titoli
+
+% Visualizziamo le prime 5 righe dei file forniti come input del progetto:
+% - btp.mat:
+disp('------------------------------------');
+disp('     Prime 5 righe file btp.mat');
+disp('------------------------------------');
+disp(btp(1:5,:));
+% il file contiene una tabella con valori di mercato di 12 Btp italiani.
+% ogni riga riporta i valori di mercato dei btp nella data specificata
+% nella prima colonna.
+
+% - bonds.mat:
+disp('------------------------------------');
+disp('          File bonds.mat');
+disp('------------------------------------');
+disp(bonds);
+% il file è stato generato dal secondo foglio presente in btp.xlsx.
+% Ogni riga rappresenta un diverso btp presente in btp.mat (12 totali)
+% le colonne indicano la data di maturity, il coupon e la descrizione
+% presente nel file.
+% NB: La descrizione è totalmente ininfluente ai fini dei calcoli,
+% è stata lasciata per motivi stilistici nella presentazione dei dati.
+
+%% 1.2 Input funzione
+% Come conseguenza della sola presenza, nel file fornitici, di
+% "codice titoli" e "valori caratteristici titoli" si prosegue illustrando
+% come inserire i diversi input mancanti
+
+% Gli input richiesti che vanno inseriti sono:
+% - metodologia di stima
+% - portafoglio titoli
+
+% Metodologia di stima.
+% le metodologie richieste sono 'Bootstrap' e 'NelsonSiegel', alle quali si
+% aggiunge come ulteriore sviluppo personale la metotodologia 'Svensson'.
+% Altre metodologie non possono essere utilizzate dalla funzione sviluppata
+% Per semplicità illustrativa, si definiscono 3 diverse variabili
+% contenenti le diverse metodologie:
 model1 = 'Bootstrap';
 model2 = 'NelsonSiegel';
 model3 = 'Svensson';
+
+% Portafoglio titoli.
+% al fine di creare un portafoglio titoli serve specificare:
+% quali titoli si vogliano inserire in portafoglio
+portCodes = [{'btp1'},{'btp2'},{'btp7'},{'btp9'}];
+% quanti titoli inserire rispettivamente.
+portValues = [1000;500;3000;2000];
+% i dati sono riassunti nella seguente tabella
+table([1000;500;3000;2000],'VariableNames',{'Values'},'RowNames',{'btp1','btp2','btp7','btp9'})
+
+%% PROSEGUIRE
+
+dateSettlement = '17-Nov-2017';
 forecastDate = '1-Sep-2018';
 valMkt = [103.12; 103.21; 101.11; 104.99];
 
