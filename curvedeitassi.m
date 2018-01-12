@@ -38,16 +38,104 @@ function [port, curva, valore_mkt] = curvedeitassi(btp,bonds,dateSettlement,port
 %output2=...
 
 %% All'interno del programma sono state richiamate le seguenti funzioni
-%matlab già esistenti:....
-%auguri
-%auguroni
-%augurissimi 
-%augurissimissimi
-%augurissimissimissimi
-% Elia diocane
-% diocane Elia
-% Elia dio boia
-% dio boia Elia
+% COMANDI USATI COMPLESSIVAMENTE:
+% 
+% repelem
+% datenum
+% length
+% find
+% strcmp
+% IRDataCurve.bootstrap
+% IRFunctionCurve.fitNelsonSiegel
+% IRFunctionCurve.fitSvensson
+% error
+% cfamounts
+% datestr
+% end
+% getDiscountFactors
+% sum
+% figure
+% datenum
+% bndyield
+% plot
+% title
+% xlabel
+% ylabel
+% hold on
+% scatter
+% datenum
+% datetick
+% clear
+% clc
+% load
+% disp
+% 
+% 
+% COMANDI USATI PER SINGOLA FUNZIONE:
+% 
+% script ( script iniziale di richiamo alla funzione curvedeitassi):
+% clear
+% clc
+% load
+% disp
+% 
+% curvedeitassi function ( funzione generale di richiamo alle seguenti funzioni):
+% datestr
+% 
+% 1. createPortfolio function:
+% repelem
+% datenum
+% length
+% find
+% 
+% 2. createCurve function:
+% strcmp
+% datenum
+% IRDataCurve.bootstrap
+% IRFunctionCurve.fitNelsonSiegel
+% IRFunctionCurve.fitSvensson
+% error
+% 
+% 3. plotForwardCurve function:
+% figure
+% datenum
+% bndyield
+% plot
+% title
+% xlabel
+% ylabel
+% hold on
+% scatter
+% datenum
+% datetick
+% 
+% 4. plotSpotCurve function
+% figure
+% datenum
+% bndyield
+% plot
+% title
+% xlabel
+% ylabel
+% hold on
+% scatter
+% datetick
+% 
+% 5. plotYieldCurve function
+% 
+% 6. curvePrices function:
+% repelem
+% length
+% cfamounts
+% datestr
+% getDiscountFactors
+% 
+% 7. compareResult function:
+% repelem
+% length
+% 
+% 8. comparePortfolio function:
+% sum
 
 
 %% BIBLIOGRAFIA
