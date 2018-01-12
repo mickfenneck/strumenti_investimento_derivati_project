@@ -99,11 +99,12 @@ forecastDate = '1-Sep-2018';
 valMkt = [103.12; 103.21; 101.11; 104.99];
 
 %% Come visualizzare la curva
-% plotCurve è una variablie booleana che permette di sopprimere di
-% visualizzare il grafico della curva dei tassi:
+% plotCurve è una variablie booleana che permette di sopprimere la
+% visualizzazione del grafico della curva dei tassi.
+% Come impostare plotCurve:
 % - true  -> la curva viene visualizzata
 % - false -> la curva NON viene visualizzata
-% l'input è opzionale, se non si voglio avere output visivi è sufficiente
+% l'input è opzionale, se non si vuole avere l'output visivo è sufficiente
 % non inserirlo.
 % Le diciture:
 % a) curvedeitassi(btp,bonds,dateSettlement,portfolio,model,forecastDate,valMkt);
@@ -121,11 +122,11 @@ plotCurve = false;
 
 
 %% Output
-disp('------------------------------------');
-disp('         Portafoglio finale');
-disp('------------------------------------');
+disp('----------------------------------------------------------------');
+disp('                     Portafoglio finale');
+disp('----------------------------------------------------------------');
 disp(port);
-disp('------------------------------------------------------------');
-disp('Differenza tra valore teorico e valore reale del portafoglio');
-disp('------------------------------------------------------------');
+disp('----------------------------------------------------------------');
+disp('  Differenza tra valore teorico e valore reale del portafoglio');
+disp('----------------------------------------------------------------');
 disp(difference);
