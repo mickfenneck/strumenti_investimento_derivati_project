@@ -1,4 +1,4 @@
-function [ portfolio, valore_mkt ] = createPortfolio( btp,bonds,dateSettlement,port)
+function [ portfolio ] = createPortfolio( btp,bonds,dateSettlement,port)
 %CREATEPORTFOLIO Summary of this function goes here
 %   Detailed explanation goes here
 nBonds = length(port.Properties.RowNames);
@@ -9,8 +9,6 @@ portfolio.instrument = repelem({'Bond'},nBonds)';
 index = find(btp.date == datenum(dateSettlement));
 portfolio.prices = btp(index,port.Properties.RowNames').Variables';
 portfolio.values = port.Values;
-
-valore_mkt = portfolio.prices'*port.Values/100
 
 end
 

@@ -173,13 +173,15 @@ function [port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,m
 % commentati (anche la struttura dei cicli o delle istruzioni se presenti)
 
 %% FUNCTION
-[port, valore_mkt] = createPortfolio(btp,bonds,dateSettlement,portfolio);
+port = createPortfolio(btp,bonds,dateSettlement,portfolio);
+valore_mkt = portfolioValue(port);
 curva = createCurve(port,model);
 startDate = datestr(port.date(1));
 endDate = '17-Nov-2027';
 %% come settare end date?
 if exist('outputPlot','var') && outputPlot
-    yield = plotSpotCurve( port, curva, startDate, endDate, 'r');
+    plotSpotCurve(port, curva, startDate, endDate, 'r');
+    %plotForwardCurve(port, curva, startDate, endDate, 'b');               %STEFANO SISTEMA STA ROBA
 end
 %calcolo prezzo teorico dei titoli
 port = curvePrices(port, curva, forecastDate);

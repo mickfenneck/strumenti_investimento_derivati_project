@@ -1,4 +1,4 @@
-function [ forward ] = plotForwardCurve( bonds, curve, startDate, endDate, color)
+function plotForwardCurve( bonds, curve, startDate, endDate, color)
 %PLOTFORWARDCURVE Summary of this function goes here
 
 %% controllare che startDate e end Date siano nell'intervallo accettabile
@@ -16,5 +16,5 @@ scatter(datenum(bonds.maturity),yield,'g')
 datetick('x')
 
 end
-end
+
 

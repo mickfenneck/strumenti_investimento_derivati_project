@@ -1,4 +1,4 @@
-function [ yield ] = plotSpotCurve( bonds, curve, startDate, endDate, color)
+function plotSpotCurve( bonds, curve, startDate, endDate, color)
 %PLOTSPOTCURVE Summary of this function goes here
 %   Detailed explanation goes here
 

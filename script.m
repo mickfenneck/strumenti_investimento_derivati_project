@@ -100,25 +100,28 @@ valMkt = [103.12; 103.21; 101.11; 104.99];
 
 %% Come visualizzare la curva
 % plotCurve è una variablie booleana che permette di sopprimere la
-% visualizzazione del grafico della curva dei tassi.
+% visualizzazione dei grafici della curva dei tassi (spot e forward).
 % Come impostare plotCurve:
 % - true  -> la curva viene visualizzata
 % - false -> la curva NON viene visualizzata
-% l'input è opzionale, se non si vuole avere l'output visivo è sufficiente
+% l'input è opzionale, se non si vuole avere output visivo è sufficiente
 % non inserirlo.
 % Le diciture:
 % a) curvedeitassi(btp,bonds,dateSettlement,portfolio,model,forecastDate,valMkt);
 % b) curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt,false);
 % sopprimono ugualmente l'output grafico
-plotCurve = false;
+% nel nostro esempio, per chiarezza, inseriamo una variabile di nome 
+% plotCurve, dal valore uguale a 'true', che verrà inserita come ultimo
+% input alla chiamata della funzione
+plotCurve = true;
 
 %% La funzione
 % A seguito dell'illustrazione degli input, si può procedere richiamando la
 % funzione curvedeitassi(..)
 
-%[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model1,forecastDate,valMkt);
+%[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model1,forecastDate,valMkt,plotCurve);
 [port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt,plotCurve);
-%[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model3,forecastDate,valMkt);
+%[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model3,forecastDate,valMkt,plotCurve);
 
 
 %% Output
