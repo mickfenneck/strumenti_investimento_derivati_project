@@ -142,15 +142,20 @@ disp('----------------------------------------------------------------');
 disp('                     Portafoglio finale');
 disp('----------------------------------------------------------------');
 disp(port.Portfolio);
+% format modificato per leggibilità risultati
+origFormat = get(0, 'format');
+format long g
 disp('----------------------------------------------------------------');
 disp('              Valore teorico del portafoglio');
 disp('----------------------------------------------------------------');
-disp(port.ValoreTeorico);
+disp(round(port.ValoreTeorico,2));
 disp('----------------------------------------------------------------');
 disp('              Valore reale del portafoglio');
 disp('----------------------------------------------------------------');
-disp(port.ValoreReale);
+disp(round(port.ValoreReale,2));
 disp('----------------------------------------------------------------');
 disp('  Differenza tra valore teorico e valore reale del portafoglio');
 disp('----------------------------------------------------------------');
-disp(port.DifferenzaRealeTeorico);
+disp(round(port.DifferenzaRealeTeorico,2));
+%format originale
+set(0,'format', origFormat);
