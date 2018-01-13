@@ -186,11 +186,7 @@ end
 port = curvePrices(port, curva);
 port = compareResult(port);
 
-valore_mercato = portfolioMarketValue(port);
-valore_reale = portfolioRealValue(port);
-
-portf = bond_portfolio(port,valore_mercato,valore_reale);
-
+portf = bond_portfolio(port);
 
 
 %% DESCRIZIONE DEllE TRE METODOLOGIE DI STIMA DELLA CURVA DEI TASSI

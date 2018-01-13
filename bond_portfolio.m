@@ -4,22 +4,28 @@ classdef bond_portfolio
     
     properties
         Portfolio           %bond portfolio table
-        ValoreTeorico       %Valore teorico portfolio
-        ValoreReale         %Valore reale portfolio
     end
     properties (Dependent)
+        ValoreTeorico               %Valore teorico portfolio
+        ValoreMercato                 %Valore reale portfolio
         DifferenzaRealeTeorico      %differenza tra v.reale e v.teorico
     end
     
     methods
-        function obj = bond_portfolio(port, vteo, vreal)
+        function obj = bond_portfolio(port)
             obj.Portfolio = port;
-            obj.ValoreTeorico = vteo;
-            obj.ValoreReale = vreal;
         end
         
         function diff = get.DifferenzaRealeTeorico(obj)
-            diff = obj.ValoreReale - obj.ValoreTeorico;
+            diff = obj.ValoreMercato - obj.ValoreTeorico;
+        end
+        
+        function vr = get.ValoreMercato(obj)
+            vr = obj.Portfolio.valMkt'*obj.Portfolio.value/100;
+        end
+        
+        function vt = get.ValoreTeorico(obj)
+            vt = obj.Portfolio.clean'*obj.Portfolio.value/100;
         end
     end
     
