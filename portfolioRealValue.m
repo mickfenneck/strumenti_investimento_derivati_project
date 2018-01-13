@@ -3,7 +3,7 @@ function [ value ] = portfolioRealValue( bonds )
 %   Detailed explanation goes here
 
 % nel valore teorico è /100?
-value = bonds.clean'*bonds.values/100;
+value = bonds.clean'*bonds.value/100;
 
 end
 

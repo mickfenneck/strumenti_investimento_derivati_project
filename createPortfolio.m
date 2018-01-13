@@ -7,8 +7,8 @@ portfolio.date = repelem({dateSettlement},nBonds)';
 portfolio.instrument = repelem({'Bond'},nBonds)';
 %price
 index = find(btp.date == datenum(dateSettlement));
-portfolio.prices = btp(index,port.Properties.RowNames').Variables';
-portfolio.values = port.Values;
+portfolio.price = btp(index,port.Properties.RowNames').Variables';
+portfolio.value = port.Value;
 %creo elenco date forecast
 portfolio.forecastDate = repelem({forecastDate},nBonds)';
 %inserisco valMkt

@@ -79,7 +79,7 @@ portCodes = [{'btp1'},{'btp2'},{'btp7'},{'btp9'}];
 % quanti titoli inserire rispettivamente.
 portValues = [1000;500;3000;2000];
 % la funzione curvedeitassi(..) prenderà in input la table riassuntiva
-portfolio = table(portValues,'VariableNames',{'Values'},'RowNames',portCodes);
+portfolio = table(portValues,'VariableNames',{'Value'},'RowNames',portCodes);
 disp('------------------------------------');
 disp('         Portafoglio titoli');
 disp('------------------------------------');
