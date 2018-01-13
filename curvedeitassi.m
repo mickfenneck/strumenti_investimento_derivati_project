@@ -175,7 +175,7 @@ function [ portf ] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model, for
 %% FUNCTION
 port = createPortfolio(btp,bonds,dateSettlement,portfolio,forecastDate,valMkt);
 curva = createCurve(port,model);
-startDate = datestr(port.date(1));
+startDate = datestr(port.date(1));      % doppio controllo
 %% come settare end date?
 if exist('outputPlot','var') && outputPlot
     endDate = '17-Nov-2027';
