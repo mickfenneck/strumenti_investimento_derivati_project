@@ -8,7 +8,7 @@ classdef bond_portfolio
     properties (Dependent)
         ValoreTeorico               %Valore teorico portfolio
         ValoreMercato                 %Valore reale portfolio
-        DifferenzaRealeTeorico      %differenza tra v.reale e v.teorico
+        DifferenzaMercatoTeorico      %differenza tra v.reale e v.teorico
     end
     
     methods
@@ -16,7 +16,7 @@ classdef bond_portfolio
             obj.Portfolio = port;
         end
         
-        function diff = get.DifferenzaRealeTeorico(obj)
+        function diff = get.DifferenzaMercatoTeorico(obj)
             diff = obj.ValoreMercato - obj.ValoreTeorico;
         end
         
