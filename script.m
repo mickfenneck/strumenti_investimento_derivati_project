@@ -103,7 +103,7 @@ forecastDate = '1-Sep-2018';
 % valMkt indica il valore di mercato dei bond inseriti nel portafoglio.
 % Questo array è necessario per calcolare le differenze tra prezzi teorici
 % e prezzi di mercato reali.
-valMkt = [103.12; 103.21; 101.11; 104.99];
+valMkt = [103.12; 103.51; 101.11; 105.36];
 
 %% Come visualizzare la curva
 % plotCurve è una variablie booleana che permette di sopprimere la
@@ -120,14 +120,14 @@ valMkt = [103.12; 103.21; 101.11; 104.99];
 % nel nostro esempio, per chiarezza, inseriamo una variabile di nome 
 % plotCurve, dal valore uguale a 'true', che verrà inserita come ultimo
 % input alla chiamata della funzione
-plotCurve = true;
+plotCurve = false;
 
 %% La funzione
 % A seguito dell'illustrazione degli input, si può procedere richiamando la
 % funzione curvedeitassi(..)
 
 %[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model1,forecastDate,valMkt,plotCurve);
-[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt,plotCurve);
+port = curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt,plotCurve);
 %[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model3,forecastDate,valMkt,plotCurve);
 
 
@@ -153,4 +153,4 @@ disp(port.ValoreReale);
 disp('----------------------------------------------------------------');
 disp('  Differenza tra valore teorico e valore reale del portafoglio');
 disp('----------------------------------------------------------------');
-disp(difference);
+disp(port.DifferenzaRealeTeorico);

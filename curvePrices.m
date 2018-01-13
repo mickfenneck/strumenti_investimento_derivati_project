@@ -1,12 +1,11 @@
-function [ bonds ] = curvePrices( bonds, curve, forecastDate)
+function [ bonds ] = curvePrices( bonds, curve)
 %CURVEPRICE Calcola curva del portafoglio
 %   Detailed explanation goes here
-
 bonds.dirty = repelem(0,length(bonds.instrument))';
 bonds.clean = repelem(0,length(bonds.instrument))';
 
 for i=1:length(bonds.instrument)
-    [cf,da]=cfamounts(bonds.coupon(i),datestr(bonds.date(i)),datestr(forecastDate));
+    [cf,da]=cfamounts(bonds.coupon(i),datestr(bonds.date(i)),datestr(bonds.forecastDate(1)));
     disc=getDiscountFactors(curve,da);
     % prezzi telquel
     bonds.dirty(i)=cf(2:end)*disc(2:end);
