@@ -1,4 +1,4 @@
-function [ portf ] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model, forecastDate, valMkt,outputPlot)
+function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,valMkt,outputPlot)
 %%CURVEDEITASSI è una funzione che mi permette di calcolare il valore di
 % mercato di un portafoglio di titoli obbligazionari, stimare la curva dei
 %tassi con 3 metodologie di stima (Bootstrap, Nelson-Siegel e Svensson), 
@@ -174,21 +174,26 @@ function [ portf ] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model, for
 % commentati (anche la struttura dei cicli o delle istruzioni se presenti)
 
 %% FUNCTION
-port = createPortfolio(btp,bonds,dateSettlement,portfolio,forecastDate,valMkt);
-curva = createCurve(port,model);
-curvaforward = createForwardCurve(port,model);
-startDate = datestr(port.date(1));      % doppio controllo
-%% come settare start end date?
-if exist('outputPlot','var') && outputPlot
-    endDate = '17-Nov-2027';
-    %plotSpotCurve(port, curva, startDate, endDate, 'r');
-    %plotForwardCurve(port, curvaforward, startDate, endDate, 'b');
-    plotYieldCurve(port, curva, startDate, endDate, 'g')
-end
+bonds = mergeData(btp,bonds);
+curva = createCurve(bonds,model);
+curvaforward = createForwardCurve(bonds,model);
+%startDate = datestr(port.date(1));      % doppio controllo
+% %% come settare start end date?
+% if exist('outputPlot','var') && outputPlot
+%     endDate = '17-Nov-2027';
+%     %plotSpotCurve(port, curva, startDate, endDate, 'r');
+%     %plotForwardCurve(port, curvaforward, startDate, endDate, 'b');
+%     plotYieldCurve(port, curva, startDate, endDate, 'g')
+% end
+
+%% cose nuove
+portfolio = createPortfolio(bonds,portfolio);
+
+
 %calcolo prezzo teorico dei titoli
-port = curvePrices(port, curva);
-port = compareResult(port);
-portf = bond_portfolio(port);
+portfolio = curvePrices(portfolio, curva);
+portfolio = compareResult(portfolio);
+portf = bond_portfolio(portfolio);
 
 
 %% DESCRIZIONE DEllE TRE METODOLOGIE DI STIMA DELLA CURVA DEI TASSI

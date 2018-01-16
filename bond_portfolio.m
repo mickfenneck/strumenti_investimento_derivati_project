@@ -21,7 +21,7 @@ classdef bond_portfolio
         end
         
         function vr = get.ValoreMercato(obj)
-            vr = obj.Portfolio.valMkt'*obj.Portfolio.value/100;
+            vr = obj.Portfolio.price'*obj.Portfolio.value/100;
         end
         
         function vt = get.ValoreTeorico(obj)

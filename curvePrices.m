@@ -18,7 +18,7 @@ bonds.clean = repelem(0,length(bonds.instrument))';
 
 for i=1:length(bonds.instrument)
     
-    [cf,da]=cfamounts(bonds.coupon(i),bonds.forecastDate(i),datestr(bonds.maturity(i)));
+    [cf,da]=cfamounts(bonds.coupon(i),datestr(bonds.date(i)),datestr(bonds.maturity(i)));
     % cfamounts restituisce i flussi di cassa e le date di pagamento delle
     % cedole di tutti i bonds che compongono il ptf dalla data di
     % valutazione del prezzo teorico del portafoglio(forecastDate) alla 
@@ -35,7 +35,6 @@ for i=1:length(bonds.instrument)
     % bonds.clean(i) rappresenta il prezzo tel-quel del titolo i-esimo nel
     % nostro ptf, questo dato verrà sostituito all'elemento 0 nella i-esima 
     % riga del vettore bonds.clean.
-    
 end
 
 end
