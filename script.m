@@ -112,7 +112,7 @@ disp(portfolio);
 % valMkt indica il valore di mercato dei bond inseriti nel portafoglio.
 % Questo array è necessario per calcolare le differenze tra prezzi teorici
 % e prezzi di mercato reali.
-valMkt = [108.101;111.308;117.022;123.397];
+%valMkt = [108.101;111.308;117.022;123.397];
 %% Come visualizzare la curva
 % plotCurve è una variablie booleana che permette di sopprimere la
 % visualizzazione dei grafici della curva dei tassi (spot e forward).
@@ -134,9 +134,9 @@ plotCurve = false;
 % A seguito dell'illustrazione degli input, si può procedere richiamando la
 % funzione curvedeitassi(..)
 
-port = curvedeitassi(btp,bonds,portfolio,model1,valMkt,plotCurve);
-%port = curvedeitassi(btp,bonds,portfolio,model2,valMkt,plotCurve);
-%port = curvedeitassi(btp,bonds,portfolio,model3,valMkt,plotCurve);
+port = curvedeitassi(btp,bonds,portfolio,model1,plotCurve);
+%port = curvedeitassi(btp,bonds,portfolio,model2,plotCurve);
+%port = curvedeitassi(btp,bonds,portfolio,model3,plotCurve);
 
 
 %% Output
