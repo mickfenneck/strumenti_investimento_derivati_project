@@ -1,6 +1,8 @@
 function [curva] = createCurve( bonds,model )
 %CREATECURVE Summary of this function goes here
 %   Detailed explanation goes here
+%la curva va creata con tutti i titoli 
+
 if strcmp(model,'Bootstrap')
     char = [datenum(bonds.date) datenum(bonds.maturity) bonds.price];
     curva =IRDataCurve.bootstrap('Zero',datenum(bonds.date(1)),bonds.instrument,char,'InstrumentCouponRate',bonds.coupon);

@@ -75,9 +75,9 @@ model3 = 'Svensson';
 % Portafoglio titoli.
 % al fine di creare un portafoglio titoli serve specificare:
 % quali titoli si vogliano inserire in portafoglio
-portCodes = [{'btp1'},{'btp2'},{'btp7'},{'btp9'}];
+portCodes = [{'btp1'},{'btp2'},{'btp3'},{'btp4'},{'btp5'},{'btp6'},{'btp7'},{'btp8'},{'btp9'},{'btp10'},{'btp11'},{'btp12'}];
 % quanti titoli inserire rispettivamente.
-portValues = [1000;500;3000;2000];
+portValues = [1000;1000;1000;1000;1000;1000;1000;1000;1000;1000;1000;1000];
 % la funzione curvedeitassi(..) prenderà in input la table riassuntiva
 portfolio = table(portValues,'VariableNames',{'Value'},'RowNames',portCodes);
 disp('------------------------------------');
@@ -95,16 +95,16 @@ disp(portfolio);
 % dateSettlement deve essere una delle date contenute nella prima colonna
 % del file btp.mat, è necessaria al fine di costruire la curva dei tassi
 % dateSettlement sarà, necessariamente, la medesima per tutti i bond
-dateSettlement = '17-Nov-2017';
+dateSettlement = '21-Nov-2017';
 % forecastDate sarà input necessario per calcolare cfamounts(..) tramite la
 % curva dei tassi che si andrà a costruire.
 % Per definizione deve essere successiva a dateSettlement
-forecastDate = '1-Sep-2018';
+forecastDate = datestr(btp.date(end));
+%forecastDate = datestr(btp(end,1));
 % valMkt indica il valore di mercato dei bond inseriti nel portafoglio.
 % Questo array è necessario per calcolare le differenze tra prezzi teorici
 % e prezzi di mercato reali.
-valMkt = [103.12; 103.51; 101.11; 105.36];
-
+valMkt = 108.101;111.308;117.022;123.397;122.089;116.941;101.125;123.519;143.469;144.117;122.147;106.452;
 %% Come visualizzare la curva
 % plotCurve è una variablie booleana che permette di sopprimere la
 % visualizzazione dei grafici della curva dei tassi (spot e forward).
@@ -126,9 +126,9 @@ plotCurve = false;
 % A seguito dell'illustrazione degli input, si può procedere richiamando la
 % funzione curvedeitassi(..)
 
-%[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model1,forecastDate,valMkt,plotCurve);
-port = curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt,plotCurve);
-%[port, difference] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model3,forecastDate,valMkt,plotCurve);
+port = curvedeitassi(btp,bonds,dateSettlement,portfolio,model1,forecastDate,valMkt,plotCurve);
+%port = curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt,plotCurve);
+%port= curvedeitassi(btp,bonds,dateSettlement,portfolio,model3,forecastDate,valMkt,plotCurve);
 
 
 %% Output

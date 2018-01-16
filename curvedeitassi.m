@@ -136,7 +136,8 @@ function [ portf ] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model, for
 % 
 % 8. comparePortfolio function:
 % sum
-
+% Si troverà una spiegazione dettagliata di ogni singola funzione
+% all'interno della funzione stessa
 %% BIBLIOGRAFIA
 
 %fonte utilizzata come approfondimento della metodologia di stima della 
@@ -175,17 +176,18 @@ function [ portf ] = curvedeitassi(btp,bonds,dateSettlement,portfolio,model, for
 %% FUNCTION
 port = createPortfolio(btp,bonds,dateSettlement,portfolio,forecastDate,valMkt);
 curva = createCurve(port,model);
+curvaforward = createForwardCurve(port,model);
 startDate = datestr(port.date(1));      % doppio controllo
-%% come settare end date?
+%% come settare start end date?
 if exist('outputPlot','var') && outputPlot
     endDate = '17-Nov-2027';
-    plotSpotCurve(port, curva, startDate, endDate, 'r');
-    %plotForwardCurve(port, curva, startDate, endDate, 'b');               %STEFANO SISTEMA STA ROBA
+    %plotSpotCurve(port, curva, startDate, endDate, 'r');
+    %plotForwardCurve(port, curvaforward, startDate, endDate, 'b');
+    plotYieldCurve(port, curva, startDate, endDate, 'g')
 end
 %calcolo prezzo teorico dei titoli
 port = curvePrices(port, curva);
 port = compareResult(port);
-
 portf = bond_portfolio(port);
 
 
