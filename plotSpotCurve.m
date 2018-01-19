@@ -1,7 +1,11 @@
 function plotSpotCurve( bonds, curve, startDate, endDate, color)
 
-%plotSpotCurve è una funzione che permette di creare un plot raffigurante
-%la curva 
+% "plotSpotCurve" è una funzione che permette di creare un plot raffiguran-
+% te la curva dei tassi spot data dalla funzione createCurve. Il grafico ha
+% come titolo: " Curva dei tasi BTP al 27-Sep-2017". Nell'asse delle
+% ascisse è riportata la scadenza a cui si riferiscono i tassi spot e lungo
+% l'asse delle ordinate la maturity. Nello stesso grafico è riportato anche
+% un scatter plot con i tassi spot alle diverse scadenze.
 
 %% controllare che startDate e end Date siano nell'intervallo accettabile
 
