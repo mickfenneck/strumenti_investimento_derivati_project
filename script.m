@@ -1,4 +1,4 @@
-%% Script Curve dei tassimdel progetto di Strumenti di Investimento e Derivati
+%% Script Curve dei tassi del progetto di Strumenti di Investimento e Derivati
 % Lo script illustra come richiamare la funzione "curvedeitassi(..)"
 % presenta come impostare gli input della funzione e fornisce un caso d'uso
 % della stessa.
@@ -71,6 +71,7 @@ disp(bonds);
 model1 = 'Bootstrap';
 model2 = 'NelsonSiegel';
 model3 = 'Svensson';
+
 
 % Portafoglio titoli.
 % al fine di creare un portafoglio titoli serve specificare:

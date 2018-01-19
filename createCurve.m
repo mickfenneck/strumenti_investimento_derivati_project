@@ -1,7 +1,12 @@
 function [curva] = createCurve( bonds,model )
-%CREATECURVE Summary of this function goes here
-%   Detailed explanation goes here
-%la curva va creata con tutti i titoli 
+%createCurve calcola la curva dei tassi usando i dati della tabella bonds
+%creata con la funzione mergeData. Questa funzione crea le curve dei tassi
+%stimate con il metodo specificato in input dall'utente. Questi metodi
+%possono essere: Bootstrap, Nelson Siegel e Svensson. La funzione
+%attraverso la condizione if costruisce automaticamente la curva corretta
+%in base al metodo scelto in input.
+%Da notare la diversa tecnica di costruzione della curva dei tassi tra il
+%metodo Bootstrap e i metodi Nelson Siegel e Svensson.
 
 if strcmp(model,'Bootstrap')
     char = [datenum(bonds.date) datenum(bonds.maturity) bonds.price];
