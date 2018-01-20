@@ -65,6 +65,7 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,valMkt,outputPlot)
 % 2. la visualizzazione di un plot della curva dei tassi spot.
 
 %% All'interno del programma sono state richiamate le seguenti funzioni
+
 % COMANDI USATI COMPLESSIVAMENTE:
 % 
 % repelem
@@ -100,22 +101,25 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,valMkt,outputPlot)
 % 
 % COMANDI USATI PER SINGOLA FUNZIONE:
 % 
-% script ( script iniziale di richiamo alla funzione curvedeitassi):
+% "script.m" ( script iniziale di richiamo alla funzione curvedeitassi):
 % clear
 % clc
 % load
 % disp
+% table
+% set
+% get
+% round
+% format
 % 
-% curvedeitassi function ( funzione generale di richiamo alle seguenti funzioni):
-% datestr
+% "curvedeitassi.m" function ( funzione generale di richiamo delle altre funzioni):
 % 
-% 1. createPortfolio function:
-% repelem
-% datenum
+% 1. "mergeData.m" function:
 % length
-% find
+% datestr
+% repelem
 % 
-% 2. createCurve function:
+% 2. "createCurve" function:
 % strcmp
 % datenum
 % IRDataCurve.bootstrap
@@ -123,46 +127,49 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,valMkt,outputPlot)
 % IRFunctionCurve.fitSvensson
 % error
 % 
-% 3. plotForwardCurve function:
-% figure
+% 3. "createPortfolio" function:
+% repelem
 % datenum
-% bndyield
-% plot
-% title
-% xlabel
-% ylabel
-% hold on
-% scatter
-% datenum
-% datetick
+% length
+% find
 % 
-% 4. plotSpotCurve function
-% figure
-% datenum
-% bndyield
-% plot
-% title
-% xlabel
-% ylabel
-% hold on
-% scatter
-% datetick
-% 
-% 5. plotYieldCurve function
-% 
-% 6. curvePrices function:
+% 4. "curvePrices.m" function:
 % repelem
 % length
 % cfamounts
 % datestr
 % getDiscountFactors
-% 
-% 7. compareResult function:
+%
+% 5. "compareResult.m" function:
 % repelem
 % length
 % 
-% 8. comparePortfolio function:
-% sum
+% 6. "bond_portfolio.m"
+% 
+% 7. "plotSpotCurve.m" function
+% figure
+% datenum
+% bndyield
+% plot
+% title
+% xlabel
+% ylabel
+% hold
+% scatter
+% datetick
+% 
+% 8. "plotYieldCurve.m" function
+% figure
+% datenum
+% bndyield
+% plot
+% title
+% xlabel
+% ylabel
+% hold
+% scatter
+% datetick
+
 % Si troverà una spiegazione dettagliata di ogni singola funzione
 % all'interno della funzione stessa
 %% BIBLIOGRAFIA
