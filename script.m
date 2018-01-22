@@ -144,6 +144,7 @@ disp('----------------------------------------------------------------');
 disp('----------------------------------------------------------------');
 disp('----------------------------------------------------------------');
 disp(' ');
+%% Output Bootstrap
 disp('-----------------------------------------------------------------');
 disp('                       METODO UTILIZZATO');
 disp('-----------------------------------------------------------------');
@@ -170,12 +171,7 @@ disp(round(portB.DifferenzaMercatoTeorico,2));
 %format originale
 set(0,'format', origFormat);
 
-
-
-
-
-
-
+%% Output Nelson Siegel
 disp(' ');
 disp('-----------------------------------------------------------------');
 disp('                       METODO UTILIZZATO');
@@ -203,9 +199,7 @@ disp(round(portNs.DifferenzaMercatoTeorico,2));
 %format originale
 set(0,'format', origFormat);
 
-
-
-
+%% Output Svensson
 disp(' ');
 disp('-----------------------------------------------------------------');
 disp('                       METODO UTILIZZATO');
@@ -233,14 +227,14 @@ disp(round(portS.DifferenzaMercatoTeorico,2));
 %format originale
 set(0,'format', origFormat);
 
-
+%% Confronto risultati
 disp('.');
 disp('.');
 disp('.');
 disp('-----------------------------------------------------------------');
 disp('-----------------------------------------------------------------');
 disp('                      CONFRONTO RISULTATI');
-%% titoli
+% titoli
 diff = table(portB.Portfolio.difference,portNs.Portfolio.difference,portS.Portfolio.difference,'VariableNames',{'Bootstrap','NelsonSiegel','Svensson'},'RowNames',portCodes);
 disp('-----------------------------------------------------------------');
 disp('-----------------------------------------------------------------');
@@ -249,9 +243,7 @@ disp('              secondo le tre diverse metodologie');
 disp(diff);
 disp('-----------------------------------------------------------------');
 disp('-----------------------------------------------------------------');
-
-
-%% portafoglio
+% portafoglio
 methods = [{'Bootstrap'},{'NelsonSiegel'},{'Svensson'}];
 differenze = [portB.DifferenzaMercatoTeorico;...
               portNs.DifferenzaMercatoTeorico;...
@@ -263,3 +255,5 @@ disp(diff_t);
 disp('-----------------------------------------------------------------');
 disp('-----------------------------------------------------------------');
 
+%% Confronto metodologie
+compareCurves(btp,bonds);
