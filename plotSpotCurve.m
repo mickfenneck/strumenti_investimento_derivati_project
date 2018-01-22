@@ -11,13 +11,13 @@ function plotSpotCurve( bonds, curve, startDate, endDate, color)
 
 %% plot della curva
 figure
-startDate=datenum('20-Nov-2017');
+startDate=datenum('22-Nov-2017');
 point= datenum(startDate):180:datenum(endDate);
 yield = bndyield(bonds.price,bonds.coupon,bonds.date(1),bonds.maturity);
 plot(point, getZeroRates(curve, point),color)
-title('Curva dei tassi BTP al 27-Sep-2017')
+title('Curva dei tassi BTP al 22-Nov-2017')
 xlabel('Maturity')
-ylabel('Yield')
+ylabel('Spot')
 hold on
 scatter(datenum(bonds.maturity),yield,'black')
 datetick('x')

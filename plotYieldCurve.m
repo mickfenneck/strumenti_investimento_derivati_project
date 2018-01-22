@@ -10,15 +10,15 @@ function plotYieldCurve( bonds,curva ,startDate, endDate,color )
 
 %% plot della curva
 figure
-%startDate=datenum('20-Nov-2017');
+
 point= datenum(startDate):180:datenum(endDate);
 yield = bndyield(bonds.price,bonds.coupon,bonds.date,bonds.maturity);
 plot(point, getParYields(curva, point),color)
-title('Curva dei tassi BTP al 15-Sep-2017')
+title('Curva dei tassi yields BTP al 22-Nov-2017')
 xlabel('Maturity')
 ylabel('Yield')
 hold on
-scatter(datenum(bonds.maturity),yield,'g')
+scatter(datenum(bonds.maturity),yield,'r')
 datetick('x')
 
 end

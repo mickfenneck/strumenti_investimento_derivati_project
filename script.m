@@ -135,8 +135,8 @@ plotCurve = false;
 % A seguito dell'illustrazione degli input, si può procedere richiamando la
 % funzione curvedeitassi(..)
 
-port = curvedeitassi(btp,bonds,portfolio,model1,plotCurve);
-%port = curvedeitassi(btp,bonds,portfolio,model2,plotCurve);
+%port = curvedeitassi(btp,bonds,portfolio,model1,plotCurve);
+port = curvedeitassi(btp,bonds,portfolio,model2,plotCurve);
 %port = curvedeitassi(btp,bonds,portfolio,model3,plotCurve);
 
 
