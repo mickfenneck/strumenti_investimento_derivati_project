@@ -1,5 +1,5 @@
 %% Script Curve dei tassi del progetto di Strumenti di Investimento e Derivati
-% Lo script illustra come richiamare la funzione "curvedeitassi(..)"
+% Lo script illustra come richiamare la funzione "curvedeitassi(..)",
 % presenta come impostare gli input della funzione e fornisce un caso d'uso
 % della stessa.
 
@@ -31,24 +31,38 @@ disp('----------------------------------------------------------------');
 % - codice titoli
 % - valori caratteristici titoli
 
-% Visualizziamo le prime 5 righe dei file forniti come input del progetto:
+% Visualizziamo le prime 5 righe del file fornito come input del progetto.
 % - btp.mat:
 disp('------------------------------------');
-disp('     Prime 5 righe file btp.mat');
+disp('    Prime 5 righe file btp.mat');
 disp('------------------------------------');
 disp(btp(1:5,:));
 % il file contiene una tabella con valori di mercato di 12 Btp italiani.
 % ogni riga riporta i valori di mercato dei btp nella data specificata
 % nella prima colonna.
 
+% NB: per il progetto, l'unica riga che si dovrà utilizzare è l'ultima
+% visualizziamo quindi la stessa: btp(end,:)
+disp('------------------------------------');
+disp('       Ultima riga file btp.mat');
+disp('------------------------------------');
+disp(btp(end,:));
+
+% La settlementDate dei nostri btp sarà quindi univocamente
+disp('------------------------------------');
+disp('       Settlement Date btp');
+disp('------------------------------------');
+disp(datestr(btp(end,1).Variables));
+
 % - bonds.mat:
 disp('------------------------------------');
 disp('          File bonds.mat');
 disp('------------------------------------');
 disp(bonds);
-% il file è stato generato dal secondo foglio presente in btp.xlsx.
-% Ogni riga rappresenta un diverso btp presente in btp.mat (12 totali)
-% le colonne indicano la data di maturity, il coupon e la descrizione
+
+% bonds.mat è stato generato dal secondo foglio presente in btp.xlsx.
+% Ogni riga rappresenta un diverso btp presente in btp.mat (12 totali).
+% Le colonne indicano la data di maturity, il coupon e la descrizione
 % presente nel file.
 % NB: La descrizione è totalmente ininfluente ai fini dei calcoli,
 % è stata lasciata per motivi stilistici nella presentazione dei dati.
@@ -58,13 +72,16 @@ disp(bonds);
 % "codice titoli" e "valori caratteristici titoli" si prosegue illustrando
 % come inserire i diversi input mancanti
 
-% Gli input richiesti che vanno inseriti sono:
+% Gli input ulteriori richiesti sono:
 % - metodologia di stima
 % - portafoglio titoli
 
 % Metodologia di stima.
 % le metodologie richieste sono 'Bootstrap' e 'NelsonSiegel', alle quali si
 % aggiunge come ulteriore sviluppo personale la metotodologia 'Svensson'.
+% Nella cartella 'paper' è presente il paper: "Il modello matematico
+% sottostante alla curva dei rendimenti della BCE", Gabriella D?Agostino, 
+% Antonio Guglielmi; esso presenta il metodo Svensson.
 % Altre metodologie non possono essere utilizzate dalla funzione sviluppata
 % Per semplicità illustrativa, si definiscono 3 diverse variabili
 % contenenti le diverse metodologie:
@@ -86,57 +103,35 @@ disp('         Portafoglio titoli');
 disp('------------------------------------');
 disp(portfolio);
 
-%% Ulteriori input
-% Al fine di sviluppare una funzione che produca gli output richiesti nella
-% consegna, sono necessari ulteriori input:
-% - dateSettlement
-% - forecastDate
-% - valMkt
 
-% dateSettlement deve essere una delle date contenute nella prima colonna
-% del file btp.mat, è necessaria al fine di costruire la curva dei tassi
-% dateSettlement sarà, necessariamente, la medesima per tutti i bond
-%dateSettlement = '21-Nov-2017';
-
-
-
-
-% forecastDate sarà input necessario per calcolare cfamounts(..) tramite la
-% curva dei tassi che si andrà a costruire.
-% Per definizione deve essere successiva a dateSettlement
-%forecastDate = datestr(btp.date(end));
-
-
-
-
-%forecastDate = datestr(btp(end,1));
-% valMkt indica il valore di mercato dei bond inseriti nel portafoglio.
-% Questo array è necessario per calcolare le differenze tra prezzi teorici
-% e prezzi di mercato reali.
-%valMkt = [108.101;111.308;117.022;123.397];
-%% Come visualizzare la curva
-% plotCurve è una variablie booleana che permette di sopprimere la
-% visualizzazione dei grafici della curva dei tassi (spot e forward).
+%% 1.3 input grafico: come visualizzare la curva.
+% plotCurve è una variablie booleana che permette la
+% visualizzazione dei grafici della curva dei tassi (spot).
 % Come impostare plotCurve:
 % - true  -> la curva viene visualizzata
 % - false -> la curva NON viene visualizzata
-% l'input è opzionale, se non si vuole avere output visivo è sufficiente
+% l'input è opzionale: se non si vuole avere output visivo è sufficiente
 % non inserirlo.
 % Le diciture:
-% a) curvedeitassi(btp,bonds,dateSettlement,portfolio,model,forecastDate,valMkt);
-% b) curvedeitassi(btp,bonds,dateSettlement,portfolio,model2,forecastDate,valMkt,false);
-% sopprimono ugualmente l'output grafico
-% nel nostro esempio, per chiarezza, inseriamo una variabile di nome 
+% a) curvedeitassi(btp,bonds,portfolio,model);
+% b) curvedeitassi(btp,bonds,portfolio,model,false);
+% sopprimono ugualmente l'output grafico.
+% Nel nostro esempio, per chiarezza, inseriamo una variabile di nome 
 % plotCurve, dal valore uguale a 'true', che verrà inserita come ultimo
 % input alla chiamata della funzione
 plotCurve = false;
 
 %% La funzione
-% A seguito dell'illustrazione degli input, si può procedere richiamando la
+% A seguito dell'illustrazione degli input, si può procedere chiamando la
 % funzione curvedeitassi(..)
 
+%Bootstrap
 %port = curvedeitassi(btp,bonds,portfolio,model1,plotCurve);
+
+%NelsonSiegel
 port = curvedeitassi(btp,bonds,portfolio,model2,plotCurve);
+
+%Svensson
 %port = curvedeitassi(btp,bonds,portfolio,model3,plotCurve);
 
 

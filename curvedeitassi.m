@@ -1,7 +1,9 @@
-function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,valMkt,outputPlot)
+function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 %% DESCRIZIONE GENERALE DELLE FUNZIONI CREATE:
-% CURVEDEITASSI è una funzione che mi permette di:
-% 1. Stimare la curva dei tassi con 3 metodologie di stima (Bootstrap, 
+% CURVEDEITASSI stima la curva dei tassi e fornisce un confronto tra valori
+% teorici (clean) e di mercato del portafoglio e dei titoli richiesti.
+
+% 1. Stima la curva dei tassi con 3 metodologie di stima (Bootstrap, 
 % Nelson-Siegel e Svensson). Nel fare questo ci riferiamo alle due
 % funzioni: "mergeData" e "createCurve". "mergeData" serve a sistemare i 
 % dati di input dei file btp e bonds in un unico file bonds. I dati
