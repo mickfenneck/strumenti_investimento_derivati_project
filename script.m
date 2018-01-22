@@ -234,14 +234,19 @@ disp(round(portS.DifferenzaMercatoTeorico,2));
 set(0,'format', origFormat);
 
 
-
+disp('.');
+disp('.');
+disp('.');
+disp('-----------------------------------------------------------------');
+disp('-----------------------------------------------------------------');
+disp('                      CONFRONTO RISULTATI');
 %% titoli
-diff_t = table(portB.Portfolio.difference,portNs.Portfolio.difference,portS.Portfolio.difference,'VariableNames',{'Bootstrap','NelsonSiegel','Svensson'},'RowNames',portCodes);
+diff = table(portB.Portfolio.difference,portNs.Portfolio.difference,portS.Portfolio.difference,'VariableNames',{'Bootstrap','NelsonSiegel','Svensson'},'RowNames',portCodes);
 disp('-----------------------------------------------------------------');
 disp('-----------------------------------------------------------------');
 disp('Differenza tra valore di mercato e valore teorico di titoli');
 disp('              secondo le tre diverse metodologie');
-disp(diff_t);
+disp(diff);
 disp('-----------------------------------------------------------------');
 disp('-----------------------------------------------------------------');
 
@@ -252,8 +257,6 @@ differenze = [portB.DifferenzaMercatoTeorico;...
               portNs.DifferenzaMercatoTeorico;...
               portS.DifferenzaMercatoTeorico];
 diff_t = table(differenze,'VariableNames',{'Differenze'},'RowNames',methods);
-disp('-----------------------------------------------------------------');
-disp('-----------------------------------------------------------------');
 disp('Differenza tra valore di mercato e valore teorico del portafoglio');
 disp('              secondo le tre diverse metodologie');
 disp(diff_t);
