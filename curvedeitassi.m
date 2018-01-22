@@ -1,73 +1,107 @@
 function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
-%% DESCRIZIONE GENERALE DELLE FUNZIONI CREATE:
+
 % CURVEDEITASSI stima la curva dei tassi e fornisce un confronto tra valori
 % teorici (clean) e di mercato del portafoglio e dei titoli richiesti.
 
-% 1. Stima la curva dei tassi con 3 metodologie di stima (Bootstrap, 
-% Nelson-Siegel e Svensson). Nel fare questo ci riferiamo alle due
-% funzioni: "mergeData" e "createCurve". "mergeData" serve a sistemare i 
-% dati di input dei file btp e bonds in un unico file bonds. I dati
-% inseriti in questo file vengono usati nella funzione createCurve, assieme
-% al metodo di stima della curva selezionato dall'utente per la costruzione
-% della curva dei tassi.
-% 
-% 2. creare un portafoglio di titoli: l'utente innanzitutto procede a sele-
-% zionare quali dei titoli usati per costruire la curva saranno parte del 
-% portafoglio di cui si calcolerà il prezzo teorico e se ne farà il con-
-% fronto con il prezzo reale di mkt. Nei dati di input inseriti dall'utente
-% nello script vi sono "portCodes" e "portValues". Questi dati si riferis-
-% cono al nome ( nel nostro caso Btp1, Btp2, Btp3, Btp4) dei titoli e al 
-% loro valore nominale. La funzione createPortfolio poi crea una tabella 
-% sulla base delle due tabelle "portfolio", che si compone di una colonna e 
-% tante righe quanti sono i titoli che l'utente ha scelto per comporre il 
-% portafolgio, e della tabella creata con mergeData. Si torna a ripetere 
-% che i titoli inseriti in questo portafoglio sono per forza parte dei 
-% titoli che prima avevamo usato per costruire la curva dei tassi. 
-%
-% 3. Calcolare il valore teorico di tutti i titoli inseriti in portafoglio.
-% Attraverso la funzione "curvePrices" si procede a stimare i prezzi clean 
-% e dirty dei titoli inseriti in portafoglio. Attraverso questa funzione si
-% procede prima a stimare i casflows e le date di pagamento dei flussi
-% cedolari di ciascun titolo inserito in portafoglio. Dopodiché si procede
-% ad estrarre i discount factors dalla curva dei tassi stimata in
-% corrispondenza di ciascuna data di pagamento cedolare. Infine si procede
-% a stimare il prezzo clean e dirty di ciascun titolo inserito in portafo-
-% glio. Da notare che in fase di costruzione la funzione viene applicata
-% all'oggetto bonds, e per cui sarebbe in grado di calcolare i prezzi
-% teorici clean e tel quel di tutti i titoli che abbiamo usato per la
-% costruzione della curva. Quando però la funzione viene richiamata, essa
-% viene applicata alla tabella portfolio e dunque è per questo set di dati
-% a cui si fa riferimento nella spiegazione della curva.
-%
-% 4. Confrontare il prezzo teorico clean dei singoli titoli scelti per 
-% comporre il portafoglio ed il loro valore reale. Con la funzione 
-% "compareResult" si procede a calcolare la differenza tra il valore di 
-% mercato per ciascun titolo voluto dall'utente ( questo è un dato di input
-% che l'utente deve inserire) ed il prezzo teorico clean stimato con la
-% curva dei tassi. L'outputdi questa funzione è inserito nella tabella
-% "portfolio" in ultima colonna. Da notare che in fase di costruzione la 
-% funzione viene applicata all'oggetto bonds, e per cui sarebbe in grado di
-% operare il confronto tra il prezzo teorico clean e tel quel di tutti i 
-% titoli che abbiamo usato per la costruzione della curva. Quando però la 
-% funzione viene richiamata, essa viene applicata alla tabella "portfolio" 
-% e dunque è a questo set di dati a cui si fa riferimento nella spiegazione
-% della curva.
-%
-% 5. creazione della classe "port" per mezzo del file "bond_portfolio". 
-% Questa classe prende la tabella "portfolio" indicante i titoli voluti 
-% dall'utente per la composizione di portafoglio ed oltre a rappresentarla 
-% al suo interno è in grado di comporre il portafolgio desiderato 
-% dall'utente, calcolarne il valore di mercato reale ed il prezzo teorico. 
-% Infine calcola differenza tra i due prezzi.
-%
-% Lo script è inoltre arricchito con:
-% 1. la visualizzazione della tabella "portfolio" all'interno della classe 
-% "port", assieme al valore di mercato e al prezzo teorico clean contenuti 
-% nella classe "port".
-% 2. la visualizzazione di un plot della curva dei tassi spot.
+% [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 
-%% All'interno del programma sono state richiamate le seguenti funzioni
+% NB: essendo outputPlot opzionale, si può sottintendere la soppressione 
+% degli output grafici chiamandola come:
 
+% [ portf ] = curvedeitassi(btp,bonds,portfolio,model)
+
+
+% CURVEDEITASSI stima la curva dei tassi spot (e yield), a partire da dei
+% file forniti in input, con la finalità di prezzare teoricamente i btp
+% specificati nel portafoglio e fornire un confronto tra prezzi teorici
+% (clean) e di mercato dei titoli e i relativi prezzi teorici (clean) e di
+% mercato dell'intero portafoglio
+
+% DESCRIZIONE GENERALE della funzione:
+
+% 1) Tramite la funzione mergeData si uniscono i valori presenti nell'ultima
+% riga del file btp (ultimi valori osservati) ai valori generali di bonds,
+% al fine di avere un'unica table contenente tutti i dati necessari al
+% calcolo delle curve dei tassi. 
+
+% 2) Tramite la funzione createCurve si crea una curva secondo il metodo
+% Bootstrap, NelsonSiegel o Svensson, in base all'input specificato
+% dall'utente.
+
+% 2.1) Se specificato dall'utente tramite la variabile outputPlot==true,
+% si procede a creare i grafici relativi alla curva spot, yield ed il
+% confronto tra le due differenti curve.
+
+% 3) Tramite la funzione createPortfolio si prosegue selezionando il
+% sottinsieme di titoli per il quale si vuole calcolare il prezzo teorico.
+% I pesi del portafoglio sono già assegnati in input, si aggiungono quindi
+% al portafoglio i valori contenuti in bonds.
+
+% 4) Tramite la funzione curvePrices si procede prima a stimare i cashflows 
+% e le date di pagamento dei flussi cedolari di ciascun titolo inserito in
+% portafoglio; si procede quindi ad estrarre i discount factors dalla curva
+% dei tassi stimata in corrispondenza di ciascuna data di pagamento cedolare.
+% Si stimano infine i prezzi clean e dirty di ciascun titolo inserito in
+% portafoglio e li si aggiunge alla table precedente.
+
+% 5) Tramite la funzione compareResult si aggiunge alla table una colonna
+% che indica la differenza tra prezzo di mercato e prezzo teorico (clean)
+
+% 6) Al fine di consegnare all'utente un output consistente, che calcoli
+% dinamicamente il valore di mercato e di portafoglio anche a seguito di
+% variazione della table, si inseriscono i dati all'interno di un oggetto
+% bond_portfolio. L'oggetto è istanziato a partire dalla classe 
+% bond_portfolio, creata per soddisfare la consegna richiesta. La struttura
+% della classe è illustrata nella sezione commenti output.
+
+% DESCRIZIONE INPUT:
+
+% btp = table contenente i valori di mercato registrati per dei bonds, ogni
+%       riga corrisponde ad una data differente. Ai fini dell'esercizio si
+%       utilizza, restando ligi alla consegna assegnata, unicamente 
+%       l'ultima riga, che registra i valori di mercato all'ultima data 
+%       disponibile.
+
+%bonds = table che contiene maturity, coupon e description dei bonds 
+%        presenti all'interno della table btp.
+
+%portfolio = table contenente i dati di portafoglio. Ogni riga corrisponde
+%            ad un differente bond, obbligatoriamente presente all'interno 
+%            delle table btp e bonds. La prima colonna contiene i valori 
+%            nominali di ogni bond.
+
+%model = stringa contenente il modello da utilizzare per la stima della
+%        curva dei tassi. Deve essere obbligatoriamente Bootstrap, 
+%        NelsonSiegel o Svensson. Altri valori generano errore 
+%        opportunamente generato.
+
+%outputPlot = variabili booleana che indica la volontà di generare i
+%             grafici tramite la funzione. L'input è OPZIONALE, se non 
+%             inserito è sottinteso che i grafici non debbano essere 
+%             generati.
+
+% NB: un'ulteriore e più approfondita analisi degli input è presente nel
+% file script.m, che illustra come chiamare la funzione e visualizzare gli
+% output dopo aver mostrato i file di input.
+
+% DESCRIZIONE OUTPUT:
+% portf = oggetto istanza della classe bond_portfolio, contenente la table
+%         del portafoglio completo. L'oggetto calcola dinamicamente il
+%         valore di mercato, teorico e la differenza tra i due valori per
+%         il portafoglio al suo interno.
+% La struttura dell'oggetto è adeguatamente commentata all'interno della
+% classe bond_portfolio.
+% L'utilizzo di un oggetto permette di evitare errori di inconsistenza tra
+% i dati: è infatti impossibile modificare i valori nominali dei titoli
+% mantenendo invariato il calcolo dei valori teorici e di mercato del 
+% portfoglio.
+
+
+
+% All'interno del programma sono state richiamate le seguenti funzioni
+% matlab già esistenti.
+
+%% questa sezione è da modificare @EliaScarparo
 % COMANDI USATI COMPLESSIVAMENTE:
 % 
 % repelem
@@ -174,6 +208,7 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 
 % Si troverà una spiegazione dettagliata di ogni singola funzione
 % all'interno della funzione stessa
+
 %% BIBLIOGRAFIA
 
 %fonte utilizzata come approfondimento della metodologia di stima della 
@@ -182,8 +217,6 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 
 %"Il modello matematico sottostante alla curva dei rendimenti della BCE"
 % autori:(Gabriella D'Agostino, Antonio Guglielmi)
-
-
 
 %"Examing the Nelson-Siegel class of term structure models"
 % autore("Michiel De Pooter")
@@ -278,6 +311,15 @@ startDate = datestr(portfolio.date(1));      % doppio controllo
 %il modello a 4 fattori (Nelson-Siegel-Svensson), che aggiunge un secondo
 %fattore pendenza al modello NS a 3 fattori, produce delle più accurate
 %previsoni della curva.
+
+
+
+
+% Lo script è inoltre arricchito con:
+% 1. la visualizzazione della tabella "portfolio" all'interno della classe 
+% "port", assieme al valore di mercato e al prezzo teorico clean contenuti 
+% nella classe "port".
+% 2. la visualizzazione di un plot della curva dei tassi spot.
 
 end
 
