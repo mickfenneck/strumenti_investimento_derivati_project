@@ -246,6 +246,17 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 bonds = mergeData(btp,bonds);
 curva = createCurve(bonds,model);
 
+% %% come settare start end date?
+if exist('outputPlot','var') && outputPlot
+    startDate = datestr(datenum(bonds.date(1))+1);      % doppio controllo
+    endDate = datestr(max(datenum(bonds.maturity)));
+    plotCurve(bonds, curva, startDate, endDate, model);
+end
+
+
+
+
+
 %% cose nuove
 portfolio = createPortfolio(bonds,portfolio);
 
@@ -255,13 +266,7 @@ portfolio = curvePrices(portfolio, curva);
 portfolio = compareResult(portfolio);
 portf = bond_portfolio(portfolio);
 
-startDate = datestr(portfolio.date(1));      % doppio controllo
-% %% come settare start end date?
-% if exist('outputPlot','var') && outputPlot
-    endDate = '17-Nov-2027';
-    plotSpotCurve(bonds, curva, startDate, endDate, 'r');
-    %plotYieldCurve(bonds, curva, startDate, endDate, 'b')
- %end
+
 
 
 %% DESCRIZIONE DELLE TRE METODOLOGIE DI STIMA DELLA CURVA DEI TASSI

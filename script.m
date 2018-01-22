@@ -119,7 +119,7 @@ disp(portfolio);
 % Nel nostro esempio, per chiarezza, inseriamo una variabile di nome 
 % plotCurve, dal valore uguale a 'true', che verrà inserita come ultimo
 % input alla chiamata della funzione
-plotCurve = false;
+plotCurve = true;
 
 %% La funzione
 % A seguito dell'illustrazione degli input, si può procedere chiamando la
@@ -129,7 +129,7 @@ plotCurve = false;
 %port = curvedeitassi(btp,bonds,portfolio,model1,plotCurve);
 
 %NelsonSiegel
-port = curvedeitassi(btp,bonds,portfolio,model2,plotCurve);
+port = curvedeitassi(btp,bonds,portfolio,model3,plotCurve);
 
 %Svensson
 %port = curvedeitassi(btp,bonds,portfolio,model3,plotCurve);
