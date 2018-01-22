@@ -264,7 +264,7 @@ portfolio = createPortfolio(bonds,portfolio);
 %calcolo prezzo teorico dei titoli
 portfolio = curvePrices(portfolio, curva);
 portfolio = compareResult(portfolio);
-portf = bond_portfolio(portfolio);
+portf = bond_portfolio(portfolio,model);
 
 
 

@@ -119,47 +119,144 @@ disp(portfolio);
 % Nel nostro esempio, per chiarezza, inseriamo una variabile di nome 
 % plotCurve, dal valore uguale a 'true', che verrà inserita come ultimo
 % input alla chiamata della funzione
-plotCurve = true;
+plotCurve = false;
 
 %% La funzione
 % A seguito dell'illustrazione degli input, si può procedere chiamando la
 % funzione curvedeitassi(..)
 
 %Bootstrap
-%port = curvedeitassi(btp,bonds,portfolio,model1,plotCurve);
+portB = curvedeitassi(btp,bonds,portfolio,model1,plotCurve);
 
 %NelsonSiegel
-port = curvedeitassi(btp,bonds,portfolio,model3,plotCurve);
+portNs = curvedeitassi(btp,bonds,portfolio,model2,plotCurve);
 
 %Svensson
-%port = curvedeitassi(btp,bonds,portfolio,model3,plotCurve);
+portS = curvedeitassi(btp,bonds,portfolio,model3,plotCurve);
 
 
 %% Output
 disp('----------------------------------------------------------------');
 disp('----------------------------------------------------------------');
+disp('----------------------------------------------------------------');
 disp('                           OUTPUTs');
+disp('----------------------------------------------------------------');
 disp('----------------------------------------------------------------');
 disp('----------------------------------------------------------------');
 disp(' ');
 disp('-----------------------------------------------------------------');
+disp('                       METODO UTILIZZATO');
+disp('-----------------------------------------------------------------');
+disp(portB.Model);
+disp('-----------------------------------------------------------------');
 disp('                     Portafoglio finale');
 disp('-----------------------------------------------------------------');
-disp(port.Portfolio);
+disp(portB.Portfolio);
 % format modificato per leggibilità risultati
 origFormat = get(0, 'format');
 format long g
 disp('-----------------------------------------------------------------');
 disp('              Valore teorico del portafoglio');
 disp('-----------------------------------------------------------------');
-disp(round(port.ValoreTeorico,2));
+disp(round(portB.ValoreTeorico,2));
 disp('-----------------------------------------------------------------');
 disp('            Valore di mercato del portafoglio');
 disp('-----------------------------------------------------------------');
-disp(round(port.ValoreMercato,2));
+disp(round(portB.ValoreMercato,2));
 disp('-----------------------------------------------------------------');
 disp('Differenza tra valore di mercato e valore teorico del portafoglio');
 disp('-----------------------------------------------------------------');
-disp(round(port.DifferenzaMercatoTeorico,2));
+disp(round(portB.DifferenzaMercatoTeorico,2));
 %format originale
 set(0,'format', origFormat);
+
+
+
+
+
+
+
+disp(' ');
+disp('-----------------------------------------------------------------');
+disp('                       METODO UTILIZZATO');
+disp('-----------------------------------------------------------------');
+disp(portNs.Model);
+disp('-----------------------------------------------------------------');
+disp('                     Portafoglio finale');
+disp('-----------------------------------------------------------------');
+disp(portNs.Portfolio);
+% format modificato per leggibilità risultati
+origFormat = get(0, 'format');
+format long g
+disp('-----------------------------------------------------------------');
+disp('              Valore teorico del portafoglio');
+disp('-----------------------------------------------------------------');
+disp(round(portNs.ValoreTeorico,2));
+disp('-----------------------------------------------------------------');
+disp('            Valore di mercato del portafoglio');
+disp('-----------------------------------------------------------------');
+disp(round(portNs.ValoreMercato,2));
+disp('-----------------------------------------------------------------');
+disp('Differenza tra valore di mercato e valore teorico del portafoglio');
+disp('-----------------------------------------------------------------');
+disp(round(portNs.DifferenzaMercatoTeorico,2));
+%format originale
+set(0,'format', origFormat);
+
+
+
+
+disp(' ');
+disp('-----------------------------------------------------------------');
+disp('                       METODO UTILIZZATO');
+disp('-----------------------------------------------------------------');
+disp(portS.Model);
+disp('-----------------------------------------------------------------');
+disp('                     Portafoglio finale');
+disp('-----------------------------------------------------------------');
+disp(portS.Portfolio);
+% format modificato per leggibilità risultati
+origFormat = get(0, 'format');
+format long g
+disp('-----------------------------------------------------------------');
+disp('              Valore teorico del portafoglio');
+disp('-----------------------------------------------------------------');
+disp(round(portS.ValoreTeorico,2));
+disp('-----------------------------------------------------------------');
+disp('            Valore di mercato del portafoglio');
+disp('-----------------------------------------------------------------');
+disp(round(portS.ValoreMercato,2));
+disp('-----------------------------------------------------------------');
+disp('Differenza tra valore di mercato e valore teorico del portafoglio');
+disp('-----------------------------------------------------------------');
+disp(round(portS.DifferenzaMercatoTeorico,2));
+%format originale
+set(0,'format', origFormat);
+
+
+
+%% titoli
+diff_t = table(portB.Portfolio.difference,portNs.Portfolio.difference,portS.Portfolio.difference,'VariableNames',{'Bootstrap','NelsonSiegel','Svensson'},'RowNames',portCodes);
+disp('-----------------------------------------------------------------');
+disp('-----------------------------------------------------------------');
+disp('Differenza tra valore di mercato e valore teorico di titoli');
+disp('              secondo le tre diverse metodologie');
+disp(diff_t);
+disp('-----------------------------------------------------------------');
+disp('-----------------------------------------------------------------');
+
+
+%% portafoglio
+methods = [{'Bootstrap'},{'NelsonSiegel'},{'Svensson'}];
+differenze = [portB.DifferenzaMercatoTeorico;...
+              portNs.DifferenzaMercatoTeorico;...
+              portS.DifferenzaMercatoTeorico];
+diff_t = table(differenze,'VariableNames',{'Differenze'},'RowNames',methods);
+disp('-----------------------------------------------------------------');
+disp('-----------------------------------------------------------------');
+disp('Differenza tra valore di mercato e valore teorico del portafoglio');
+disp('              secondo le tre diverse metodologie');
+disp(diff_t);
+disp('-----------------------------------------------------------------');
+disp('-----------------------------------------------------------------');
+

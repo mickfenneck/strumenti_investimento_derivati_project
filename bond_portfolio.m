@@ -6,6 +6,7 @@ classdef bond_portfolio
     
     properties
         Portfolio           %bond portfolio table
+        Model               %modello usato
     end
     
     % Come istanze e attributi della classe abbiamo utilizzato gli oggetti:
@@ -25,8 +26,9 @@ classdef bond_portfolio
     % assegnarlo agli oggetti che compongono le istanze della classe.
     
     methods
-        function obj = bond_portfolio(port)
+        function obj = bond_portfolio(port, model)
             obj.Portfolio = port;
+            obj.Model = model;
         end
         
         function diff = get.DifferenzaMercatoTeorico(obj)
