@@ -119,7 +119,7 @@ disp(portfolio);
 % Nel nostro esempio, per chiarezza, inseriamo una variabile di nome 
 % plotCurve, dal valore uguale a 'true', che verrà inserita come ultimo
 % input alla chiamata della funzione
-plotCurve = false;
+plotCurve = true;
 
 %% La funzione
 % A seguito dell'illustrazione degli input, si può procedere chiamando la
@@ -170,9 +170,12 @@ disp('-----------------------------------------------------------------');
 disp(round(portB.DifferenzaMercatoTeorico,2));
 %format originale
 set(0,'format', origFormat);
-
-%% Output Nelson Siegel
 disp(' ');
+disp(' ');
+disp(' ');
+disp(' ');
+disp(' ');
+%% Output Nelson Siegel
 disp('-----------------------------------------------------------------');
 disp('                       METODO UTILIZZATO');
 disp('-----------------------------------------------------------------');
@@ -198,9 +201,12 @@ disp('-----------------------------------------------------------------');
 disp(round(portNs.DifferenzaMercatoTeorico,2));
 %format originale
 set(0,'format', origFormat);
-
-%% Output Svensson
 disp(' ');
+disp(' ');
+disp(' ');
+disp(' ');
+disp(' ');
+%% Output Svensson
 disp('-----------------------------------------------------------------');
 disp('                       METODO UTILIZZATO');
 disp('-----------------------------------------------------------------');
@@ -226,34 +232,46 @@ disp('-----------------------------------------------------------------');
 disp(round(portS.DifferenzaMercatoTeorico,2));
 %format originale
 set(0,'format', origFormat);
-
-%% Confronto risultati
-disp('.');
-disp('.');
-disp('.');
+disp(' ');
+disp(' ');
+disp(' ');
+disp(' ');
+disp(' ');
+%% Confronto risultati - PARTE AGGIUNTIVA
+% al fine di concludere questo use case della funzione curvedeitassi è
+% utile dare uno sguardo alle differenze tra i risultati ottenuti tramite
+% le tre differenti metodologie
 disp('-----------------------------------------------------------------');
 disp('-----------------------------------------------------------------');
 disp('                      CONFRONTO RISULTATI');
-% titoli
-diff = table(portB.Portfolio.difference,portNs.Portfolio.difference,portS.Portfolio.difference,'VariableNames',{'Bootstrap','NelsonSiegel','Svensson'},'RowNames',portCodes);
 disp('-----------------------------------------------------------------');
 disp('-----------------------------------------------------------------');
-disp('Differenza tra valore di mercato e valore teorico di titoli');
+disp('   Differenza tra valore di mercato e valore teorico dei titoli');
 disp('              secondo le tre diverse metodologie');
-disp(diff);
+disp(' ');
+disp(' ');
+% titoli
+disp(table(portB.Portfolio.difference,portNs.Portfolio.difference, ...
+           portS.Portfolio.difference,'VariableNames', ...
+           {'Bootstrap','NelsonSiegel','Svensson'},'RowNames',portCodes));
+       
 disp('-----------------------------------------------------------------');
 disp('-----------------------------------------------------------------');
 % portafoglio
+disp('Differenza tra valore di mercato e valore teorico del portafoglio');
+disp('              secondo le tre diverse metodologie');
+disp(' ');
+disp(' ');
 methods = [{'Bootstrap'},{'NelsonSiegel'},{'Svensson'}];
 differenze = [portB.DifferenzaMercatoTeorico;...
               portNs.DifferenzaMercatoTeorico;...
               portS.DifferenzaMercatoTeorico];
-diff_t = table(differenze,'VariableNames',{'Differenze'},'RowNames',methods);
-disp('Differenza tra valore di mercato e valore teorico del portafoglio');
-disp('              secondo le tre diverse metodologie');
-disp(diff_t);
+disp(table(differenze,'VariableNames',{'Differenze'},'RowNames',methods));
 disp('-----------------------------------------------------------------');
 disp('-----------------------------------------------------------------');
 
-%% Confronto metodologie
+%% Confronto metodologie - PARTE AGGIUNTIVA
+% Come ultimo punto di questo use case si fornisce un grafico contenente un
+% confronto tra le curve spot e yield calcolate secondo le tre differenti
+% metodologie
 compareCurves(btp,bonds);

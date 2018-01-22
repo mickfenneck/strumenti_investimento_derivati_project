@@ -11,48 +11,29 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 % [ portf ] = curvedeitassi(btp,bonds,portfolio,model)
 
 
-% CURVEDEITASSI stima la curva dei tassi spot (e yield), a partire da dei
+% CURVEDEITASSI stima la curva dei tassi spot (e yield), a partire da due
 % file forniti in input, con la finalità di prezzare teoricamente i btp
 % specificati nel portafoglio e fornire un confronto tra prezzi teorici
 % (clean) e di mercato dei titoli e i relativi prezzi teorici (clean) e di
-% mercato dell'intero portafoglio
+% mercato dell'intero portafoglio. La funzione produce, in maniera opzionale,
+% un output grafico contenente la curva dei tassi spot, la curva dei tassi
+% yield ed un confronto tra esse.
 
-% DESCRIZIONE GENERALE della funzione:
 
-% 1) Tramite la funzione mergeData si uniscono i valori presenti nell'ultima
-% riga del file btp (ultimi valori osservati) ai valori generali di bonds,
-% al fine di avere un'unica table contenente tutti i dati necessari al
-% calcolo delle curve dei tassi. 
+% La funzione inizialmente unisce i valori dei due file, creando una table
+% con gli input necessari al calcolo della curva dei tassi. Prosegue 
+% creando la curva, in base al metodo dato in input. Unicamente se 
+% specificato dall'utente produce l'output grafico creando i grafici 
+% relativi alla curva spot, curva yield ed il confronto tra le due 
+% differenti curve.
+% Una volta calcolata la curva a partire da tutti i btp, si prosegue 
+% arricchendo l'input portfolio con i dati contenuti nei due file e si 
+% calcolano quindi i prezzi clean e dirty, grazie alla curva appena creata.
+% Trovati i prezzi teorici (clean) si aggiunge ai titoli contenuti in 
+% portfolio la differenza tra il valore di mercato ed il prezzo clean.
+% Come ultimo passaggio si istanzia un oggetto bond_portfolio per fornire 
+% all'utente un output comodo e consistente.
 
-% 2) Tramite la funzione createCurve si crea una curva secondo il metodo
-% Bootstrap, NelsonSiegel o Svensson, in base all'input specificato
-% dall'utente.
-
-% 2.1) Se specificato dall'utente tramite la variabile outputPlot==true,
-% si procede a creare i grafici relativi alla curva spot, yield ed il
-% confronto tra le due differenti curve.
-
-% 3) Tramite la funzione createPortfolio si prosegue selezionando il
-% sottinsieme di titoli per il quale si vuole calcolare il prezzo teorico.
-% I pesi del portafoglio sono già assegnati in input, si aggiungono quindi
-% al portafoglio i valori contenuti in bonds.
-
-% 4) Tramite la funzione curvePrices si procede prima a stimare i cashflows 
-% e le date di pagamento dei flussi cedolari di ciascun titolo inserito in
-% portafoglio; si procede quindi ad estrarre i discount factors dalla curva
-% dei tassi stimata in corrispondenza di ciascuna data di pagamento cedolare.
-% Si stimano infine i prezzi clean e dirty di ciascun titolo inserito in
-% portafoglio e li si aggiunge alla table precedente.
-
-% 5) Tramite la funzione compareResult si aggiunge alla table una colonna
-% che indica la differenza tra prezzo di mercato e prezzo teorico (clean)
-
-% 6) Al fine di consegnare all'utente un output consistente, che calcoli
-% dinamicamente il valore di mercato e di portafoglio anche a seguito di
-% variazione della table, si inseriscono i dati all'interno di un oggetto
-% bond_portfolio. L'oggetto è istanziato a partire dalla classe 
-% bond_portfolio, creata per soddisfare la consegna richiesta. La struttura
-% della classe è illustrata nella sezione commenti output.
 
 % DESCRIZIONE INPUT:
 
@@ -75,7 +56,7 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 %        NelsonSiegel o Svensson. Altri valori generano errore 
 %        opportunamente generato.
 
-%outputPlot = variabili booleana che indica la volontà di generare i
+%outputPlot = variabile booleana che indica la volontà di generare i
 %             grafici tramite la funzione. L'input è OPZIONALE, se non 
 %             inserito è sottinteso che i grafici non debbano essere 
 %             generati.
@@ -95,7 +76,6 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 % i dati: è infatti impossibile modificare i valori nominali dei titoli
 % mantenendo invariato il calcolo dei valori teorici e di mercato del 
 % portfoglio.
-
 
 
 % All'interno del programma sono state richiamate le seguenti funzioni
@@ -209,7 +189,7 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 % Si troverà una spiegazione dettagliata di ogni singola funzione
 % all'interno della funzione stessa
 
-%% BIBLIOGRAFIA
+% BIBLIOGRAFIA
 
 %fonte utilizzata come approfondimento della metodologia di stima della 
 %term structure con il modello di Nelson siegel e Svensson per estrazione
@@ -242,36 +222,56 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 % Ogni comando e ogni passo del programma devono essere adeguatamente
 % commentati (anche la struttura dei cicli o delle istruzioni se presenti)
 
-%% FUNCTION
+% FUNCTION
+% Tramite la funzione mergeData si uniscono i valori presenti nell'ultima
+% riga del file btp (ultimi valori osservati) ai valori generali di bonds,
+% al fine di avere un'unica table contenente tutti i dati necessari al
+% calcolo delle curve dei tassi. 
 bonds = mergeData(btp,bonds);
+
+% Tramite la funzione createCurve si crea una curva secondo il metodo
+% Bootstrap, NelsonSiegel o Svensson, in base all'input specificato
+% dall'utente.
 curva = createCurve(bonds,model);
 
-% %% come settare start end date?
+% Se specificato dall'utente tramite la variabile outputPlot==true,
+% si procede a creare i grafici relativi alla curva spot, yield ed il
+% confronto tra le due differenti curve.
+% La condizione if controlla l'esistenza della variabile outputPlot, se la
+% variabile esiste allora controlla che sia uguale a true.
 if exist('outputPlot','var') && outputPlot
-    startDate = datestr(datenum(bonds.date(1))+1);      % doppio controllo
-    endDate = datestr(max(datenum(bonds.maturity)));
-    plotCurve(bonds, curva, startDate, endDate, model);
+    plotCurve(bonds, curva, model);
 end
 
-
-
-
-
-%% cose nuove
+% Tramite la funzione createPortfolio si prosegue selezionando il
+% sottinsieme di titoli per il quale si vuole calcolare il prezzo teorico.
+% I pesi del portafoglio sono già assegnati in input, si aggiungono quindi
+% al portafoglio i valori contenuti in bonds.
 portfolio = createPortfolio(bonds,portfolio);
 
-
-%calcolo prezzo teorico dei titoli
+% Tramite la funzione curvePrices si procede prima a stimare i cashflows 
+% e le date di pagamento dei flussi cedolari di ciascun titolo inserito in
+% portafoglio; si procede quindi ad estrarre i discount factors dalla curva
+% dei tassi stimata in corrispondenza di ciascuna data di pagamento cedolare.
+% Si stimano infine i prezzi clean e dirty di ciascun titolo inserito in
+% portafoglio e li si aggiunge alla table precedente.
 portfolio = curvePrices(portfolio, curva);
+
+% Tramite la funzione compareResult si aggiunge alla table una colonna
+% che indica la differenza tra prezzo di mercato e prezzo teorico (clean)
 portfolio = compareResult(portfolio);
+
+% Al fine di consegnare all'utente un output consistente, che calcoli
+% dinamicamente il valore di mercato e di portafoglio anche a seguito di
+% variazione della table, si inseriscono i dati all'interno di un oggetto
+% bond_portfolio. L'oggetto è istanziato a partire dalla classe 
+% bond_portfolio, creata per soddisfare la consegna richiesta. La struttura
+% della classe è illustrata nella sezione commenti output.
 portf = bond_portfolio(portfolio,model);
 
 
 
-
 %% DESCRIZIONE DELLE TRE METODOLOGIE DI STIMA DELLA CURVA DEI TASSI
-
-
 %I tre modelli  estraggono  i tassi spot utilizzando gli strumenti presenti
 %sul mercato.
 
@@ -317,14 +317,19 @@ portf = bond_portfolio(portfolio,model);
 %fattore pendenza al modello NS a 3 fattori, produce delle più accurate
 %previsoni della curva.
 
-
-
-
+%% PARTE AGGIUNTIVA
 % Lo script è inoltre arricchito con:
-% 1. la visualizzazione della tabella "portfolio" all'interno della classe 
-% "port", assieme al valore di mercato e al prezzo teorico clean contenuti 
-% nella classe "port".
-% 2. la visualizzazione di un plot della curva dei tassi spot.
+% 1. classe bond_portfolio
+% 2. metodologia Svensson per il calcolo della curva dei tassi
+% 3. funzione plotCurve per visualizzare curva dei tassi spot, curva dei 
+%    tassi yield e confronto tra le due curve
+% 4. funzione compareCurves per calcolare e confrontare le tre differenti
+%    curve dei tassi spot e le tre differenti curve dei tassi yield per le
+%    tre diverse metodologie
+% 5. use case della funzione curvedeitassi per approfondire la modellazione
+%    dei dati ed illustrare al meglio input, chiamata della funzione 
+%    curvedeitassi(..), output e parte aggiuntiva (compreso confronto tra i
+%    risultati ottenuti).
 
 end
 
