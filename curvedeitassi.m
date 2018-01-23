@@ -37,7 +37,7 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 
 % DESCRIZIONE INPUT:
 
-% btp = table contenente i valori di mercato registrati per dei bonds, ogni
+%btp = table contenente i valori di mercato registrati per dei bonds, ogni
 %       riga corrisponde ad una data differente. Ai fini dell'esercizio si
 %       utilizza, restando ligi alla consegna assegnata, unicamente 
 %       l'ultima riga, che registra i valori di mercato all'ultima data 

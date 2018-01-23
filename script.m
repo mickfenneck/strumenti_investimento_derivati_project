@@ -8,7 +8,7 @@
 clear
 % pulisce la console - Command Window - di Matlab
 clc
-% Caricamento i dati salvati in formato .mat:
+% Caricamento dei dati salvati in formato .mat:
 load data/btp.mat       % fornito da progetto
 load data/bonds.mat     % creato alla base del secondo foglio di btp.xlsx
 
@@ -29,7 +29,7 @@ disp('----------------------------------------------------------------');
 %% 1.1 FILE input
 % I file contengono i seguenti input:
 % - codice titoli
-% - valori caratteristici titoli
+% - valori caratteristici dei titoli
 
 % Visualizziamo le prime 5 righe del file fornito come input del progetto.
 % - btp.mat:
@@ -37,8 +37,8 @@ disp('------------------------------------');
 disp('    Prime 5 righe file btp.mat');
 disp('------------------------------------');
 disp(btp(1:5,:));
-% il file contiene una tabella con valori di mercato di 12 Btp italiani.
-% ogni riga riporta i valori di mercato dei btp nella data specificata
+% il file contiene una tabella con i valori di mercato di 12 Btp italiani.
+% Ogni riga riporta i valori di mercato dei btp alla data specificata
 % nella prima colonna.
 
 % NB: per il progetto, l'unica riga che si dovrà utilizzare è l'ultima
@@ -77,10 +77,10 @@ disp(bonds);
 % - portafoglio titoli
 
 % Metodologia di stima.
-% le metodologie richieste sono 'Bootstrap' e 'NelsonSiegel', alle quali si
+% Le metodologie richieste sono 'Bootstrap' e 'NelsonSiegel', alle quali si
 % aggiunge come ulteriore sviluppo personale la metotodologia 'Svensson'.
 % Nella cartella 'paper' è presente il paper: "Il modello matematico
-% sottostante alla curva dei rendimenti della BCE", Gabriella D?Agostino, 
+% sottostante alla curva dei rendimenti della BCE", Gabriella D'Agostino, 
 % Antonio Guglielmi; esso presenta il metodo Svensson.
 % Altre metodologie non possono essere utilizzate dalla funzione sviluppata
 % Per semplicità illustrativa, si definiscono 3 diverse variabili
@@ -119,7 +119,7 @@ disp(portfolio);
 % Nel nostro esempio, per chiarezza, inseriamo una variabile di nome 
 % plotCurve, dal valore uguale a 'true', che verrà inserita come ultimo
 % input alla chiamata della funzione
-plotCurve = true;
+plotCurve = false;
 
 %% La funzione
 % A seguito dell'illustrazione degli input, si può procedere chiamando la
