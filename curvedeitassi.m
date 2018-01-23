@@ -81,55 +81,58 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 % All'interno del programma sono state richiamate le seguenti funzioni
 % matlab già esistenti.
 
-%% questa sezione è da modificare @EliaScarparo
-% COMANDI USATI COMPLESSIVAMENTE:
-% 
-% repelem
-% datenum
+%% COMANDI USATI PER SINGOLA FUNZIONE:
+% clear
+% clc
+% load
+% disp
+% datestr
+% table
+% get
+% round
+% set
+% format
+% exist
 % length
-% find
+% repelem
 % strcmp
+% datenum
 % IRDataCurve.bootstrap
 % IRFunctionCurve.fitNelsonSiegel
 % IRFunctionCurve.fitSvensson
 % error
 % cfamounts
-% datestr
-% end
 % getDiscountFactors
-% sum
-% figure
-% datenum
+% max
 % bndyield
+% figure
 % plot
 % title
 % xlabel
 % ylabel
-% hold on
+% hold
 % scatter
-% datenum
 % datetick
-% clear
-% clc
-% load
-% disp
-% 
-% 
-% COMANDI USATI PER SINGOLA FUNZIONE:
-% 
+% subplot
+% legend
+% suptitle
+
 % "script.m" ( script iniziale di richiamo alla funzione curvedeitassi):
 % clear
 % clc
 % load
 % disp
+% datestr
 % table
-% set
 % get
 % round
+% set
 % format
 % 
-% "curvedeitassi.m" function ( funzione generale di richiamo delle altre funzioni):
-% 
+% "curvedeitassi.m" function ( funzione generale di richiamo delle altre 
+% funzioni):
+% exist
+%
 % 1. "mergeData.m" function:
 % length
 % datestr
@@ -144,10 +147,6 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 % error
 % 
 % 3. "createPortfolio" function:
-% repelem
-% datenum
-% length
-% find
 % 
 % 4. "curvePrices.m" function:
 % repelem
@@ -162,10 +161,11 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 % 
 % 6. "bond_portfolio.m"
 % 
-% 7. "plotSpotCurve.m" function
-% figure
+% 7. "plotCurve.m" function
 % datenum
+% max
 % bndyield
+% figure
 % plot
 % title
 % xlabel
@@ -173,18 +173,32 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 % hold
 % scatter
 % datetick
-% 
-% 8. "plotYieldCurve.m" function
-% figure
+% subplot
+% legend
+%
+% 8. "compareCurves.m" function
 % datenum
+% max
 % bndyield
+% figure
+% subplot
 % plot
+% scatter
 % title
 % xlabel
 % ylabel
+% datetick
+% legend
+% hold
+% subplot
+% plot
 % hold
 % scatter
-% datetick
+% title
+% ylabel
+% xlabel
+% legend
+% suptitle
 
 % Si troverà una spiegazione dettagliata di ogni singola funzione
 % all'interno della funzione stessa
