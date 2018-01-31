@@ -119,10 +119,10 @@ disp(portfolio);
 % Nel nostro esempio, per chiarezza, inseriamo una variabile di nome 
 % plotCurve, dal valore uguale a 'true', che verrà inserita come ultimo
 % input alla chiamata della funzione
-plotCurve = true;
+plotCurve = false;
 
 %% La funzione
-% A seguito dell'illustrazione degli input, si può procedere richiamando la
+% A seguito dell'illustrazione degli input, si può procedere chiamando la
 % funzione curvedeitassi(..)
 
 %Bootstrap

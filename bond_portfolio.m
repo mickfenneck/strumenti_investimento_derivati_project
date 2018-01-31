@@ -2,7 +2,7 @@ classdef bond_portfolio
     
     % BOND_PORTFOLIO: classe che rappresenta un portafoglio di bonds
     % contenente i risultati della funzione curvedeitassi.
-    % La classe è create per fornire all'utente un tipo di oggetto rigoroso
+    % La classe è creata per fornire all'utente un tipo di oggetto rigoroso
     % e facilitarlo nell'utilizzo dello stesso.
     
     % Proprietà dell'oggetto

@@ -30,7 +30,7 @@ for i=1:length(bonds.instrument)
     % portafoglio, questo dato verrà sostituito all'elemento 0 nella 
     % i-esima riga del vettore bonds.dirty.
     bonds.dirty(i)=cf(2:end)*disc(2:end);
-    % bonds.clean(i) rappresenta il prezzo tel-quel del titolo i-esimo nel
+    % bonds.clean(i) rappresenta il prezzo clean del titolo i-esimo nel
     % portafoglio, questo dato verrà sostituito all'elemento 0 nella  
     % i-esima riga del vettore bonds.clean.
     bonds.clean(i)=cf*disc;

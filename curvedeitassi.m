@@ -232,10 +232,6 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 
 %% COMANDI FUNZIONE
 
-
-% Ogni comando e ogni passo del programma devono essere adeguatamente
-% commentati (anche la struttura dei cicli o delle istruzioni se presenti)
-
 % FUNCTION
 % Tramite la funzione mergeData si uniscono i valori presenti nell'ultima
 % riga del file btp (ultimi valori osservati) ai valori generali di bonds,
