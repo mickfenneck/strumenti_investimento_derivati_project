@@ -13,7 +13,7 @@ curve2 = createCurve(bonds,'NelsonSiegel');
 % Creazione curva 'Svensson'
 curve3 = createCurve(bonds,'Svensson');
 
-% Per calcolare getZeroRates è necessario avere un arco temporale
+% Per utilizzare getZeroRates è necessario avere un arco temporale
 % successivo alla settlement date. In base a ciò si fissa come startDate il
 % giorno successivo alla settlementDate.
 startDate = datenum(bonds.date(1))+1;

@@ -68,7 +68,7 @@ disp(bonds);
 % è stata lasciata per motivi stilistici nella presentazione dei dati.
 
 %% 1.2 Input funzione
-% Come conseguenza della sola presenza, nel file fornitici, di
+% Come conseguenza della sola presenza, nel file fornitoci, di
 % "codice titoli" e "valori caratteristici titoli" si prosegue illustrando
 % come inserire i diversi input mancanti
 
@@ -94,7 +94,7 @@ model3 = 'Svensson';
 % al fine di creare un portafoglio titoli serve specificare:
 % quali titoli si vogliano inserire in portafoglio
 portCodes = [{'btp1'},{'btp2'},{'btp3'},{'btp4'}];
-% quanti titoli inserire rispettivamente.
+% quanti titoli ( in termini di valore nominale) inserire rispettivamente.
 portValues = [1000;1000;1000;1000];
 % la funzione curvedeitassi(..) prenderà in input la table riassuntiva
 portfolio = table(portValues,'VariableNames',{'value'},'RowNames',portCodes);

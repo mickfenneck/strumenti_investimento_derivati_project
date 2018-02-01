@@ -206,7 +206,7 @@ function [ portf ] = curvedeitassi(btp,bonds,portfolio,model,outputPlot)
 % BIBLIOGRAFIA
 
 %fonte utilizzata come approfondimento della metodologia di stima della 
-%term structure con il modello di Nelson siegel e Svensson per estrazione
+%term structure con il modello di Nelson Siegel e Svensson per estrazione
 %dei tassi spot dalla curva dei tassi:
 
 %"Il modello matematico sottostante alla curva dei rendimenti della BCE"
@@ -303,8 +303,8 @@ portf = bond_portfolio(portfolio,model);
 
 %Nelson & Siegel (1987) hanno suggerito un diverso approccio:
 %Si parte da un'equazione differenziale per la derivazione dei tassi
-%Forward. Con una serie di passaggi matematici si arriva poi alla curva dei
-%tassi forward. In matlab utilizzando questo modello il software 
+%Forward. Con una serie di passaggi matematici si arriva poi alle curve dei
+%tassi forward e spot. In matlab utilizzando questo modello il software 
 %lavora in questo modo: sulla base dei dati costruisce la curva e poi si
 %estrae la curva dei tassi spot; esso calcola in punti definiti i tassi e
 %poi va a calcolarsi i 4 parametri della curva Nelson siegel.
@@ -316,7 +316,7 @@ portf = bond_portfolio(portfolio,model);
 
 %IN AGGIUNTA AL CONTENUTO DI OUTPUT MINIMO RICHIESTO abbiamo voluto 
 %costruire la curva dei tassi secondo il metodo Svensson. Per incrementare 
-%la flessibilità e migliorare l'adattamento della curva dei tassi Svensson 
+%la flessibilità e migliorare l'adattamento della curva dei tassi, Svensson 
 %estende la funzione di Nelson - Siegel aggiungendo un quarto parametro 
 %pendenza al modello a 3 fattori e ciò conduce ad una migliore capacità 
 %previsiva della curva. Questo è confermato nel paper di "Michiel De Pooter" 
@@ -329,15 +329,15 @@ portf = bond_portfolio(portfolio,model);
 
 %% PARTE AGGIUNTIVA
 % Lo script è inoltre arricchito con:
-% 1. classe bond_portfolio
-% 2. metodologia Svensson per il calcolo della curva dei tassi
+% 1. classe bond_portfolio;
+% 2. metodologia Svensson per il calcolo della curva dei tassi;
 % 3. funzione plotCurve per visualizzare curva dei tassi spot, curva dei 
-%    tassi yield e confronto tra le due curve
+%    tassi yield e confronto tra le due curve;
 % 4. funzione compareCurves per calcolare e confrontare le tre differenti
 %    curve dei tassi spot e le tre differenti curve dei tassi yield per le
-%    tre diverse metodologie
+%    tre diverse metodologie;
 % 5. use case della funzione curvedeitassi per approfondire la modellazione
-%    dei dati ed illustrare al meglio input, chiamata della funzione 
+%    dei dati ed illustrare al meglio gli input, chiamata nella funzione 
 %    curvedeitassi(..), output e parte aggiuntiva (compreso confronto tra i
 %    risultati ottenuti).
 

@@ -4,7 +4,7 @@ function [ bonds ] = mergeData( btp,bonds)
 % al calcolo della curva dei tassi.
 % I dati necessari infatti sono:
 % maturity -> data di scadenza del bond
-% coupon -> cedola del bond
+% coupon -> cedola (tasso) del bond
 % instrument -> tipologia di titolo
 % price -> prezzo di mercato alla data di settlement di ciascun titolo
 % date -> data di settlement del titolo

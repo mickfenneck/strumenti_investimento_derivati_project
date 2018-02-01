@@ -8,8 +8,8 @@ function [ port ] = createPortfolio(bonds,port)
 % coupon;
 % descrizione;
 % date (settlement);
-% instrument
-% price (valore di mercato)
+% instrument;
+% price (valore di mercato).
 
 % si concatenano a port le colonne del sottinsieme di tali titoli contenute
 % in bonds

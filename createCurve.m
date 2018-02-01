@@ -4,14 +4,14 @@ function [curva] = createCurve( bonds,model )
 % I metodi che si possono utilizzare, come precedentemente indicato, sono:
 % Bootstrap, Nelson Siegel e Svensson. 
 
-% La funzione attraverso la condizione if costruisce automaticamente la 
+% La funzione, attraverso la condizione if, costruisce automaticamente la 
 % curva corretta in base al metodo dato in input.
 % È interessante notare la differente classe della curva dei tassi tra il
 % metodo Bootstrap e i metodi Nelson Siegel e Svensson.
 
 % Se l'input è 'Bootstrap'
 if strcmp(model,'Bootstrap')
-    % si crea la matrice char con colonne date (convertita in numero),
+    % si crea la matrice char con colonne: date (convertite in numero),
     % maturity (convertita in numero) e prezzo di mercato dei btp
     char = [datenum(bonds.date) datenum(bonds.maturity) bonds.price];
     % si crea la curva secondo il metodo Bootstrap

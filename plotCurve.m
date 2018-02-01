@@ -1,15 +1,15 @@
 function plotCurve( bonds, curve, model)
 
-% plotCurve è una funzione che permette di creare una figure raffigurante:
+% plotCurve è una funzione che permette di creare una figura contenente:
 % - la curva dei tassi spot
 % - la curva dei tassi yields
 % - il confronto tra le due precedenti curve
 % Nell'asse delle ascisse è riportata la scadenza a cui si riferiscono i 
 % tassi spot e lungo l'asse delle ordinate il tasso.
-% Nei grafici è riportato anche un scatter plot con i tassi spot alle 
+% Nei grafici è riportato anche uno scatter plot con i tassi spot alle 
 % diverse scadenze.
 
-% Per calcolare getZeroRates è necessario avere un arco temporale
+% Per usare getZeroRates è necessario avere un arco temporale
 % successivo alla settlement date. In base a ciò si fissa come startDate il
 % giorno successivo alla settlementDate.
 startDate = datenum(bonds.date(1))+1;
